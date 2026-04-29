@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>HoopBoard Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #06080f;
+      --surface: #0c1018;
+      --surface2: #111622;
+      --border: #1a2332;
+      --border2: #243040;
+      --text: #e8edf5;
+      --muted: #5a6a80;
+      --accent: #00d4ff;
+      --a-color: #ff4040;
+      --b-color: #3a9fff;
+      --green: #00e87a;
+      --gold: #ffc840;
+      --red: #ff3535;
+      --font-d: 'Barlow Condensed', sans-serif;
+      --font-b: 'Barlow', sans-serif;
+    }
+
+    html, body { height: 100%; overflow: hidden; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-b); }
+
+    /* ──────────────── FULLSCREEN ──────────────── */
+    :fullscreen #nav, :-webkit-full-screen #nav { display: none !important; }
+    :fullscreen #page-display, :-webkit-full-screen #page-display { height: 100vh; }
+    :fullscreen .display-wrap, :-webkit-full-screen .display-wrap { height: 100vh; }
+
+    /* ──────────────── NAV ──────────────── */
+    #nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 16px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      z-index: 100;
+    }
+    .logo {
+      font-family: var(--font-d);
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .logo em { color: #fff; font-style: normal; }
+
+    .live-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,232,122,.08);
+      border: 1px solid rgba(0,232,122,.25);
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--green);
+    }
+    .live-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: blink 1.8s infinite;
+    }
+    .live-pill.offline { color: var(--muted); border-color: var(--border); background: transparent; }
+    .live-pill.offline .live-dot { background: var(--muted); animation: none; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    .nav-right { margin-left: auto; display: flex; gap: 6px; align-items: center; }
+    .nav-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 7px 14px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-family: var(--font-b);
+      font-size: 13px;
+      font-weight: 600;
+      transition: all .18s;
+      white-space: nowrap;
+    }
+    .nav-btn:hover { background: var(--surface2); color: var(--text); border-color: var(--border2); }
+    .nav-btn.active { background: var(--surface2); border-color: var(--accent); color: var(--accent); }
+    .nav-btn.ref-a.active { border-color: var(--a-color); color: var(--a-color); }
+    .nav-btn.ref-b.active { border-color: var(--b-color); color: var(--b-color); }
+    .nav-btn.fs-btn { font-size: 16px; padding: 6px 10px; }
+
+    /* ──────────────── PAGES ──────────────── */
+    .page { display: none; height: calc(100vh - 52px); overflow-y: auto; }
+    .page.active { display: block; }
+
+    /* ──────────────── DISPLAY PAGE ──────────────── */
+    .display-wrap {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 52px);
+      background: var(--bg);
+    }
+    .courts-row { display: flex; flex: 1; overflow: hidden; }
+
+    .court-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 28px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: flex .6s cubic-bezier(.4,0,.2,1);
+    }
+    .court-panel.close-game { flex: 1.18; }
+    .court-a { border-right: 1px solid var(--border); }
+
+    /* court background glow */
+    .court-a::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 20% 50%, rgba(255,64,64,.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .court-b::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 80% 50%, rgba(58,159,255,.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .court-label {
+      font-family: var(--font-d);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      opacity: .45;
+    }
+    .court-a .court-label { color: var(--a-color); }
+    .court-b .court-label { color: var(--b-color); }
+
+    .team-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 6px;
+    }
+    .team-color-bar {
+      width: 5px;
+      border-radius: 3px;
+      height: 52px;
+      flex-shrink: 0;
+      transition: background .4s;
+    }
+    .team-name {
+      font-family: var(--font-d);
+      font-size: clamp(22px, 3.8vw, 42px);
+      font-weight: 800;
+      letter-spacing: .3px;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .team-score {
+      font-family: var(--font-d);
+      font-size: clamp(60px, 10vw, 108px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -3px;
+      min-width: 110px;
+      text-align: right;
+      transition: color .2s;
+    }
+    .team-score.pop  { animation: scorePop .5s cubic-bezier(.3,1.6,.4,1); }
+    .team-score.three { animation: threePop .7s cubic-bezier(.3,1.8,.4,1); }
+    @keyframes scorePop  { 0%{transform:scale(1)} 35%{transform:scale(1.28);color:var(--gold)} 100%{transform:scale(1)} }
+    @keyframes threePop  { 0%{transform:scale(1)} 22%{transform:scale(1.45);color:var(--green);text-shadow:0 0 40px var(--green)} 60%{transform:scale(1.18)} 100%{transform:scale(1);text-shadow:none} }
+
+    .divider { height: 1px; background: var(--border); margin: 14px 0; opacity: .35; }
+
+    .fouls-row { display: flex; gap: 7px; margin-top: 2px; margin-bottom: 2px; }
+    .foul-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border2); transition: background .2s; }
+    .foul-dot.on { background: #ff6b35; box-shadow: 0 0 6px #ff6b3566; }
+
+    .clock-area { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
+    .clock {
+      font-family: var(--font-d);
+      font-size: clamp(36px, 5.5vw, 72px);
+      font-weight: 700;
+      letter-spacing: 3px;
+      font-variant-numeric: tabular-nums;
+      transition: color .3s;
+    }
+    .clock.clutch { color: var(--red); animation: pulse 1.2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+
+    .qbadge {
+      font-family: var(--font-d);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: 7px;
+      padding: 7px 14px;
+      color: var(--muted);
+    }
+    .poss-dot {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin-left: auto;
+      animation: possGlow 2s infinite;
+      visibility: hidden;
+    }
+    @keyframes possGlow { 0%,100%{box-shadow:0 0 6px var(--gold)} 50%{box-shadow:0 0 18px var(--gold)} }
+
+    /* Momentum bar */
+    .mom-bar { margin-top: 16px; }
+    .mom-label { font-size: 10px; letter-spacing: 3px; color: var(--muted); margin-bottom: 5px; text-transform: uppercase; }
+    .mom-track { height: 5px; background: var(--surface2); border-radius: 3px; position: relative; overflow: hidden; }
+    .mom-fill { height: 100%; background: linear-gradient(90deg, var(--a-color), var(--b-color)); position: absolute; left: 0; top: 0; transition: width .9s ease; }
+    .mom-center { position: absolute; left: 50%; top: -1px; width: 2px; height: 7px; background: var(--border2); transform: translateX(-50%); }
+
+    /* Clutch overlay */
+    .clutch-ov { position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(255,53,53,.07) 0%, transparent 68%); pointer-events: none; opacity: 0; transition: opacity .5s; }
+    .clutch-ov.on { opacity: 1; }
+
+    /* Banner */
+    .banner {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 11px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-height: 46px;
+      flex-shrink: 0;
+    }
+    .banner-tag { font-family: var(--font-d); font-size: 10px; letter-spacing: 4px; color: var(--accent); font-weight: 800; flex-shrink: 0; text-transform: uppercase; }
+    .banner-msg { font-family: var(--font-d); font-size: 17px; font-weight: 600; flex: 1; }
+    .banner-sponsor { font-size: 12px; color: var(--muted); flex-shrink: 0; }
+
+    /* ──────────────── LOGIN SCREEN ──────────────── */
+    .login-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100%;
+      padding: 24px;
+    }
+    .login-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+    .login-emoji { font-size: 52px; margin-bottom: 14px; display: block; }
+    .login-title { font-family: var(--font-d); font-size: 32px; font-weight: 900; margin-bottom: 6px; }
+    .login-sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; line-height: 1.5; }
+    .login-input {
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 18px;
+      width: 100%;
+      margin-bottom: 14px;
+      letter-spacing: 4px;
+      text-align: center;
+      font-family: var(--font-d);
+      font-weight: 700;
+      transition: border-color .2s;
+    }
+    .login-input:focus { outline: none; border-color: var(--accent); }
+    .login-input.shake { animation: shake .35s ease; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-family: var(--font-d);
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: opacity .18s, transform .12s;
+    }
+    .login-btn:hover { opacity: .88; }
+    .login-btn:active { transform: scale(.97); }
+    .login-btn-a { background: var(--a-color); color: #fff; }
+    .login-btn-b { background: var(--b-color); color: #fff; }
+    .login-error { color: var(--red); font-size: 13px; margin-top: 10px; min-height: 20px; font-weight: 600; }
+    .login-hint { font-size: 12px; color: var(--muted); margin-top: 14px; }
+
+    /* ──────────────── REF PANEL ──────────────── */
+    .ref-container { max-width: 430px; margin: 0 auto; padding: 18px 16px 32px; }
+
+    .ref-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    .ref-court-name { font-family: var(--font-d); font-size: 14px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; }
+    .ref-status { display: flex; align-items: center; gap: 6px; font-family: var(--font-d); font-size: 13px; color: var(--muted); }
+    .sdot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+    .sdot.live { background: var(--green); box-shadow: 0 0 8px var(--green); animation: blink 1.5s infinite; }
+    .sdot.paused { background: var(--gold); }
+    .logout-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all .18s;
+    }
+    .logout-btn:hover { border-color: var(--red); color: var(--red); }
+
+    .score-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+    .sc-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .sc-name { font-family: var(--font-d); font-size: 20px; font-weight: 800; }
+    .sc-num { font-family: var(--font-d); font-size: 46px; font-weight: 900; line-height: 1; }
+    .sc-divider { height: 1px; background: var(--border); margin: 10px 0; }
+    .sc-clock { text-align: center; margin-top: 10px; }
+    .sc-clock-val { font-family: var(--font-d); font-size: 30px; font-weight: 700; letter-spacing: 2px; }
+    .sc-clock-q { font-family: var(--font-d); font-size: 13px; color: var(--muted); margin-left: 10px; letter-spacing: 2px; }
+
+    .sec-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .btn-grid { display: grid; gap: 8px; margin-bottom: 14px; }
+    .g3 { grid-template-columns: repeat(3,1fr); }
+    .g2 { grid-template-columns: repeat(2,1fr); }
+    .g1 { grid-template-columns: 1fr; }
+
+    .cb {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 11px;
+      padding: 18px 8px;
+      font-family: var(--font-d);
+      font-size: 20px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all .12s;
+      text-align: center;
+      letter-spacing: .5px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .cb:active { transform: scale(.95); }
+    .cb.p1 { border-color: #4d8cff; color: #4d8cff; } .cb.p1:hover { background: #4d8cff18; }
+    .cb.p2 { border-color: #00ccff; color: #00ccff; } .cb.p2:hover { background: #00ccff18; }
+    .cb.p3 { border-color: var(--green); color: var(--green); } .cb.p3:hover { background: #00e87a18; }
+    .cb.m1 { border-color: #ff7043; color: #ff7043; } .cb.m1:hover { background: #ff704318; }
+    .cb.go { border-color: var(--green); color: var(--green); } .cb.go:hover { background: #00e87a18; }
+    .cb.pa { border-color: var(--gold); color: var(--gold); } .cb.pa:hover { background: #ffc84018; }
+    .cb.fo { border-color: #ff9500; color: #ff9500; } .cb.fo:hover { background: #ff950018; }
+    .cb.po { border-color: var(--gold); color: var(--gold); } .cb.po:hover { background: #ffc84018; }
+    .cb.nq { border-color: var(--muted); color: var(--muted); } .cb.nq:hover { background: #ffffff0a; }
+
+    /* ──────────────── ADMIN ──────────────── */
+    .admin-wrap { max-width: 720px; margin: 0 auto; padding: 24px 18px 40px; }
+    .admin-title { font-family: var(--font-d); font-size: 30px; font-weight: 900; margin-bottom: 22px; color: var(--accent); }
+
+    .tabs { display: flex; gap: 4px; background: var(--surface2); border-radius: 11px; padding: 4px; margin-bottom: 20px; }
+    .tab {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      padding: 9px 6px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: var(--font-b);
+      font-size: 13px;
+      font-weight: 600;
+      transition: all .18s;
+    }
+    .tab.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 6px rgba(0,0,0,.4); }
+    .tc { display: none; } .tc.on { display: block; }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px; margin-bottom: 16px; }
+    .card-title { font-family: var(--font-d); font-size: 15px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+
+    .inp { background: var(--surface2); border: 1px solid var(--border2); color: var(--text); border-radius: 9px; padding: 10px 13px; font-family: var(--font-b); font-size: 14px; width: 100%; margin-bottom: 9px; }
+    .inp:focus { outline: none; border-color: var(--accent); }
+    .sel { background: var(--surface2); border: 1px solid var(--border2); color: var(--text); border-radius: 9px; padding: 10px 13px; font-family: var(--font-b); font-size: 14px; width: 100%; margin-bottom: 9px; appearance: none; }
+    .lbl { font-size: 12px; color: var(--muted); margin-bottom: 4px; display: block; letter-spacing: .5px; }
+    .ab {
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 9px 16px;
+      cursor: pointer;
+      font-family: var(--font-b);
+      font-size: 13px;
+      font-weight: 600;
+      transition: all .18s;
+      margin: 2px;
+    }
+    .ab:hover { background: var(--border); }
+    .ab.pri { border-color: var(--accent); color: var(--accent); } .ab.pri:hover { background: #00d4ff14; }
+    .ab.suc { border-color: var(--green); color: var(--green); } .ab.suc:hover { background: #00e87a14; }
+    .ab.dan { border-color: var(--red); color: var(--red); } .ab.dan:hover { background: #ff353514; }
+    .ab.war { border-color: var(--gold); color: var(--gold); } .ab.war:hover { background: #ffc84014; }
+
+    .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 9px; }
+    .field { flex: 1; min-width: 90px; }
+    .color-inp { width: 44px; height: 36px; border: 1px solid var(--border2); border-radius: 7px; cursor: pointer; background: none; padding: 2px; }
+    .g2-admin { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .team-list { display: flex; flex-direction: column; gap: 7px; margin-top: 10px; }
+    .team-item { display: flex; align-items: center; gap: 9px; background: var(--surface2); border-radius: 9px; padding: 9px 13px; }
+    .tdot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+    .tname { flex: 1; font-size: 14px; font-weight: 600; }
+    .xbtn { background: transparent; border: none; color: var(--muted); cursor: pointer; font-size: 16px; padding: 4px; }
+    .xbtn:hover { color: var(--red); }
+    .ta { background: var(--surface2); border: 1px solid var(--border2); color: var(--text); border-radius: 9px; padding: 10px 13px; font-family: var(--font-b); font-size: 14px; width: 100%; margin-bottom: 9px; resize: none; height: 64px; }
+    .ta:focus { outline: none; border-color: var(--accent); }
+    .sbadge { display: inline-block; background: var(--surface2); border-radius: 6px; padding: 4px 10px; font-size: 12px; color: var(--muted); margin: 2px; }
+
+    /* Password card highlight */
+    .pw-info { background: rgba(0,212,255,.06); border: 1px solid rgba(0,212,255,.15); border-radius: 10px; padding: 14px; font-size: 13px; color: var(--muted); line-height: 1.6; margin-top: 12px; }
+    .pw-info strong { color: var(--accent); }
+
+    /* ──────────────── TOAST ──────────────── */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 12px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s, transform .25s;
+      white-space: nowrap;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ──────────────── FIREBASE BANNER ──────────────── */
+    #cfg-banner {
+      position: fixed;
+      inset: 0;
+      background: rgba(6,8,15,.96);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .cfg-box {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 20px;
+      padding: 36px;
+      max-width: 560px;
+      width: 100%;
+    }
+    .cfg-title { font-family: var(--font-d); font-size: 28px; font-weight: 900; color: var(--accent); margin-bottom: 8px; }
+    .cfg-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+    .cfg-inp { background: var(--surface2); border: 1px solid var(--border2); color: var(--text); border-radius: 9px; padding: 10px 13px; font-family: var(--font-b); font-size: 13px; width: 100%; margin-bottom: 10px; }
+    .cfg-inp:focus { outline: none; border-color: var(--accent); }
+    .cfg-btn { background: var(--accent); border: none; color: #000; border-radius: 9px; padding: 12px 24px; font-family: var(--font-d); font-size: 18px; font-weight: 900; cursor: pointer; width: 100%; margin-top: 6px; letter-spacing: 1px; transition: opacity .18s; }
+    .cfg-btn:hover { opacity: .88; }
+    .cfg-step { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .cfg-code { background: var(--surface2); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: var(--accent); font-family: monospace; margin-bottom: 10px; word-break: break-all; }
+    .cfg-err { color: var(--red); font-size: 13px; margin-top: 8px; min-height: 20px; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     FIREBASE CONFIG OVERLAY (first run only)
+══════════════════════════════════════════ -->
+<div id="cfg-banner">
+  <div class="cfg-box">
+    <div class="cfg-title">🔥 Firebase Setup</div>
+    <div class="cfg-sub">Connect your Firebase Realtime Database for cross-device live sync. This only needs to be done once — settings are saved in your browser.</div>
+
+    <div class="cfg-step">1. Go to <strong>console.firebase.google.com</strong> → your project → Project Settings → Web app config</div>
+    <div class="cfg-step">2. Paste your <strong>databaseURL</strong> below (looks like <code>https://YOUR-PROJECT-default-rtdb.firebaseio.com</code>)</div>
+
+    <label class="cfg-step" style="margin-top:12px;display:block">Firebase Database URL</label>
+    <input class="cfg-inp" id="cfg-db-url" placeholder="https://your-project-default-rtdb.firebaseio.com">
+
+    <label class="cfg-step" style="margin-top:8px;display:block">Firebase API Key</label>
+    <input class="cfg-inp" id="cfg-api-key" placeholder="AIzaSy...">
+
+    <label class="cfg-step" style="margin-top:8px;display:block">Firebase Project ID</label>
+    <input class="cfg-inp" id="cfg-project-id" placeholder="your-project-id">
+
+    <div class="cfg-step" style="margin-top:14px;color:#ff9500">⚠️ Firebase Rules: Set your Realtime Database rules to allow read/write (for testing):</div>
+    <div class="cfg-code">{ "rules": { ".read": true, ".write": true } }</div>
+
+    <button class="cfg-btn" onclick="saveFirebaseConfig()">CONNECT & LAUNCH →</button>
+    <div class="cfg-err" id="cfg-err"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MAIN APP
+══════════════════════════════════════════ -->
+<div id="app" style="display:none">
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="logo">Hoop<em>Board</em></div>
+    <div class="live-pill offline" id="live-pill">
+      <div class="live-dot"></div>
+      <span id="live-txt">CONNECTING</span>
+    </div>
+    <div class="nav-right">
+      <button class="nav-btn active" id="nb-display" onclick="showPage('display')">📺 Display</button>
+      <button class="nav-btn ref-a"  id="nb-ref-a"   onclick="showPage('ref-a')">🏀 Ref A</button>
+      <button class="nav-btn ref-b"  id="nb-ref-b"   onclick="showPage('ref-b')">🏀 Ref B</button>
+      <button class="nav-btn"        id="nb-admin"   onclick="showPage('admin')">⚙️ Admin</button>
+      <button class="nav-btn fs-btn" title="Fullscreen" onclick="toggleFS()">⛶</button>
+    </div>
+  </nav>
+
+  <!-- ── DISPLAY PAGE ── -->
+  <div class="page active" id="page-display">
+    <div class="display-wrap">
+      <div class="courts-row">
+        <!-- COURT A -->
+        <div class="court-panel court-a" id="cp-a">
+          <div class="clutch-ov" id="cov-a"></div>
+          <div class="court-label">⬤ Court A</div>
+          <div class="team-row">
+            <div class="team-color-bar" id="tcb-a1"></div>
+            <div class="team-name" id="tn-a1">Team 1</div>
+            <div class="team-score" id="ts-a1">0</div>
+          </div>
+          <div class="fouls-row" id="fr-a1"></div>
+          <div class="divider"></div>
+          <div class="team-row">
+            <div class="team-color-bar" id="tcb-a2"></div>
+            <div class="team-name" id="tn-a2">Team 2</div>
+            <div class="team-score" id="ts-a2">0</div>
+          </div>
+          <div class="fouls-row" id="fr-a2"></div>
+          <div class="clock-area">
+            <div class="clock" id="cl-a">10:00</div>
+            <div class="qbadge" id="qb-a">Q1</div>
+            <div class="poss-dot" id="pd-a"></div>
+          </div>
+          <div class="mom-bar">
+            <div class="mom-label">Momentum</div>
+            <div class="mom-track">
+              <div class="mom-fill" id="mf-a" style="width:50%"></div>
+              <div class="mom-center"></div>
+            </div>
+          </div>
+        </div>
+        <!-- COURT B -->
+        <div class="court-panel court-b" id="cp-b">
+          <div class="clutch-ov" id="cov-b"></div>
+          <div class="court-label">⬤ Court B</div>
+          <div class="team-row">
+            <div class="team-color-bar" id="tcb-b1"></div>
+            <div class="team-name" id="tn-b1">Team 3</div>
+            <div class="team-score" id="ts-b1">0</div>
+          </div>
+          <div class="fouls-row" id="fr-b1"></div>
+          <div class="divider"></div>
+          <div class="team-row">
+            <div class="team-color-bar" id="tcb-b2"></div>
+            <div class="team-name" id="tn-b2">Team 4</div>
+            <div class="team-score" id="ts-b2">0</div>
+          </div>
+          <div class="fouls-row" id="fr-b2"></div>
+          <div class="clock-area">
+            <div class="clock" id="cl-b">10:00</div>
+            <div class="qbadge" id="qb-b">Q1</div>
+            <div class="poss-dot" id="pd-b"></div>
+          </div>
+          <div class="mom-bar">
+            <div class="mom-label">Momentum</div>
+            <div class="mom-track">
+              <div class="mom-fill" id="mf-b" style="width:50%"></div>
+              <div class="mom-center"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="banner">
+        <div class="banner-tag">Live</div>
+        <div class="banner-msg" id="banner-msg">Welcome to HoopBoard Pro — Real-Time Basketball Scoreboard</div>
+        <div class="banner-sponsor" id="banner-sponsor">Powered by HoopBoard</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── REF A PAGE ── -->
+  <div class="page" id="page-ref-a">
+    <!-- Login -->
+    <div class="login-screen" id="lg-a">
+      <div class="login-box">
+        <span class="login-emoji">🏀</span>
+        <div class="login-title" style="color:var(--a-color)">Referee A</div>
+        <div class="login-sub">Court A control panel<br>Enter your password to continue</div>
+        <input type="password" class="login-input" id="li-a" placeholder="••••••" maxlength="30"
+          onkeydown="if(event.key==='Enter')doLogin('a')">
+        <button class="login-btn login-btn-a" onclick="doLogin('a')">ENTER COURT A</button>
+        <div class="login-error" id="le-a"></div>
+        <div class="login-hint">Password set by Admin panel</div>
+      </div>
+    </div>
+    <!-- Panel (hidden until login) -->
+    <div id="rp-a" style="display:none">
+      <div class="ref-container">
+        <div class="ref-topbar">
+          <div>
+            <div class="ref-court-name" style="color:var(--a-color)">⬤ Court A</div>
+            <div class="ref-status">
+              <div class="sdot" id="sd-a"></div>
+              <span id="st-a">Ready</span>
+            </div>
+          </div>
+          <button class="logout-btn" onclick="doLogout('a')">Logout</button>
+        </div>
+        <div class="score-card">
+          <div class="sc-row">
+            <div class="sc-name" id="rn-a1" style="color:#ff6060">—</div>
+            <div class="sc-num" id="rs-a1">0</div>
+          </div>
+          <div class="sc-divider"></div>
+          <div class="sc-row">
+            <div class="sc-name" id="rn-a2" style="color:#5599ff">—</div>
+            <div class="sc-num" id="rs-a2">0</div>
+          </div>
+          <div class="sc-clock">
+            <span class="sc-clock-val" id="rc-a">10:00</span>
+            <span class="sc-clock-q" id="rq-a">Q1</span>
+          </div>
+        </div>
+
+        <div class="sec-label">Team 1 — Points</div>
+        <div class="btn-grid g3">
+          <button class="cb p1" onclick="addScore('a',1,1)">+1</button>
+          <button class="cb p2" onclick="addScore('a',1,2)">+2</button>
+          <button class="cb p3" onclick="addScore('a',1,3)">+3 🔥</button>
+        </div>
+        <div class="sec-label">Team 2 — Points</div>
+        <div class="btn-grid g3">
+          <button class="cb p1" onclick="addScore('a',2,1)">+1</button>
+          <button class="cb p2" onclick="addScore('a',2,2)">+2</button>
+          <button class="cb p3" onclick="addScore('a',2,3)">+3 🔥</button>
+        </div>
+        <div class="sec-label">Undo / Correct</div>
+        <div class="btn-grid g2">
+          <button class="cb m1" onclick="undoScore('a',1)">−1 Team 1</button>
+          <button class="cb m1" onclick="undoScore('a',2)">−1 Team 2</button>
+        </div>
+        <div class="sec-label">Clock & Game</div>
+        <div class="btn-grid g2">
+          <button class="cb go" id="tb-a" onclick="toggleTimer('a')">▶ Start</button>
+          <button class="cb po" onclick="togglePoss('a')">⬡ Possession</button>
+        </div>
+        <div class="btn-grid g3">
+          <button class="cb fo" onclick="addFoul('a',1)">Foul T1</button>
+          <button class="cb fo" onclick="addFoul('a',2)">Foul T2</button>
+          <button class="cb nq" onclick="nextQ('a')">Next Q ▶</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── REF B PAGE ── -->
+  <div class="page" id="page-ref-b">
+    <!-- Login -->
+    <div class="login-screen" id="lg-b">
+      <div class="login-box">
+        <span class="login-emoji">🏀</span>
+        <div class="login-title" style="color:var(--b-color)">Referee B</div>
+        <div class="login-sub">Court B control panel<br>Enter your password to continue</div>
+        <input type="password" class="login-input" id="li-b" placeholder="••••••" maxlength="30"
+          onkeydown="if(event.key==='Enter')doLogin('b')">
+        <button class="login-btn login-btn-b" onclick="doLogin('b')">ENTER COURT B</button>
+        <div class="login-error" id="le-b"></div>
+        <div class="login-hint">Password set by Admin panel</div>
+      </div>
+    </div>
+    <!-- Panel -->
+    <div id="rp-b" style="display:none">
+      <div class="ref-container">
+        <div class="ref-topbar">
+          <div>
+            <div class="ref-court-name" style="color:var(--b-color)">⬤ Court B</div>
+            <div class="ref-status">
+              <div class="sdot" id="sd-b"></div>
+              <span id="st-b">Ready</span>
+            </div>
+          </div>
+          <button class="logout-btn" onclick="doLogout('b')">Logout</button>
+        </div>
+        <div class="score-card">
+          <div class="sc-row">
+            <div class="sc-name" id="rn-b1" style="color:#ff6060">—</div>
+            <div class="sc-num" id="rs-b1">0</div>
+          </div>
+          <div class="sc-divider"></div>
+          <div class="sc-row">
+            <div class="sc-name" id="rn-b2" style="color:#5599ff">—</div>
+            <div class="sc-num" id="rs-b2">0</div>
+          </div>
+          <div class="sc-clock">
+            <span class="sc-clock-val" id="rc-b">10:00</span>
+            <span class="sc-clock-q" id="rq-b">Q1</span>
+          </div>
+        </div>
+
+        <div class="sec-label">Team 3 — Points</div>
+        <div class="btn-grid g3">
+          <button class="cb p1" onclick="addScore('b',1,1)">+1</button>
+          <button class="cb p2" onclick="addScore('b',1,2)">+2</button>
+          <button class="cb p3" onclick="addScore('b',1,3)">+3 🔥</button>
+        </div>
+        <div class="sec-label">Team 4 — Points</div>
+        <div class="btn-grid g3">
+          <button class="cb p1" onclick="addScore('b',2,1)">+1</button>
+          <button class="cb p2" onclick="addScore('b',2,2)">+2</button>
+          <button class="cb p3" onclick="addScore('b',2,3)">+3 🔥</button>
+        </div>
+        <div class="sec-label">Undo / Correct</div>
+        <div class="btn-grid g2">
+          <button class="cb m1" onclick="undoScore('b',1)">−1 Team 3</button>
+          <button class="cb m1" onclick="undoScore('b',2)">−1 Team 4</button>
+        </div>
+        <div class="sec-label">Clock & Game</div>
+        <div class="btn-grid g2">
+          <button class="cb go" id="tb-b" onclick="toggleTimer('b')">▶ Start</button>
+          <button class="cb po" onclick="togglePoss('b')">⬡ Possession</button>
+        </div>
+        <div class="btn-grid g3">
+          <button class="cb fo" onclick="addFoul('b',1)">Foul T3</button>
+          <button class="cb fo" onclick="addFoul('b',2)">Foul T4</button>
+          <button class="cb nq" onclick="nextQ('b')">Next Q ▶</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ADMIN PAGE ── -->
+  <div class="page" id="page-admin">
+    <div class="admin-wrap">
+      <div class="admin-title">⚙️ Admin Panel</div>
+      <div class="tabs">
+        <button class="tab on"  onclick="aTab('games',this)">Games</button>
+        <button class="tab"     onclick="aTab('teams',this)">Teams</button>
+        <button class="tab"     onclick="aTab('passwords',this)">🔐 Passwords</button>
+        <button class="tab"     onclick="aTab('broadcast',this)">Broadcast</button>
+        <button class="tab"     onclick="aTab('system',this)">System</button>
+      </div>
+
+      <!-- GAMES -->
+      <div class="tc on" id="tc-games">
+        <div class="g2-admin">
+          <div class="card">
+            <div class="card-title" style="color:var(--a-color)">⬤ Court A</div>
+            <label class="lbl">Team 1</label>
+            <select class="sel" id="aa-t1" onchange="applyTeams()"></select>
+            <label class="lbl">Team 2</label>
+            <select class="sel" id="aa-t2" onchange="applyTeams()"></select>
+            <label class="lbl">Quarter Duration (min)</label>
+            <select class="sel" id="aa-qdur" onchange="applyQDur('a')">
+              <option value="5">5 min</option><option value="8">8 min</option>
+              <option value="10" selected>10 min</option><option value="12">12 min</option>
+            </select>
+            <label class="lbl">Override Score T1</label>
+            <div class="row"><input type="number" class="inp" id="ov-a-s1" min="0" style="margin-bottom:0"><button class="ab war" onclick="ovScore('a',1)">Set</button></div>
+            <label class="lbl">Override Score T2</label>
+            <div class="row"><input type="number" class="inp" id="ov-a-s2" min="0" style="margin-bottom:0"><button class="ab war" onclick="ovScore('a',2)">Set</button></div>
+            <label class="lbl">Set Clock (mm:ss)</label>
+            <div class="row"><input type="text" class="inp" id="ov-a-clk" placeholder="10:00" style="margin-bottom:0"><button class="ab war" onclick="ovClock('a')">Set</button></div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px">
+              <button class="ab pri" onclick="startGame('a')">Start Game</button>
+              <button class="ab dan" onclick="resetGame('a')">Reset</button>
+              <button class="ab" onclick="swapTeams('a')">Swap</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="color:var(--b-color)">⬤ Court B</div>
+            <label class="lbl">Team 1</label>
+            <select class="sel" id="ab-t1" onchange="applyTeams()"></select>
+            <label class="lbl">Team 2</label>
+            <select class="sel" id="ab-t2" onchange="applyTeams()"></select>
+            <label class="lbl">Quarter Duration (min)</label>
+            <select class="sel" id="ab-qdur" onchange="applyQDur('b')">
+              <option value="5">5 min</option><option value="8">8 min</option>
+              <option value="10" selected>10 min</option><option value="12">12 min</option>
+            </select>
+            <label class="lbl">Override Score T1</label>
+            <div class="row"><input type="number" class="inp" id="ov-b-s1" min="0" style="margin-bottom:0"><button class="ab war" onclick="ovScore('b',1)">Set</button></div>
+            <label class="lbl">Override Score T2</label>
+            <div class="row"><input type="number" class="inp" id="ov-b-s2" min="0" style="margin-bottom:0"><button class="ab war" onclick="ovScore('b',2)">Set</button></div>
+            <label class="lbl">Set Clock (mm:ss)</label>
+            <div class="row"><input type="text" class="inp" id="ov-b-clk" placeholder="10:00" style="margin-bottom:0"><button class="ab war" onclick="ovClock('b')">Set</button></div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px">
+              <button class="ab pri" onclick="startGame('b')">Start Game</button>
+              <button class="ab dan" onclick="resetGame('b')">Reset</button>
+              <button class="ab" onclick="swapTeams('b')">Swap</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEAMS -->
+      <div class="tc" id="tc-teams">
+        <div class="card">
+          <div class="card-title">Add Team</div>
+          <div class="row">
+            <div class="field"><label class="lbl">Name</label><input type="text" class="inp" id="nt-name" placeholder="e.g. Lakers" style="margin-bottom:0"></div>
+            <div><label class="lbl">Color</label><input type="color" class="color-inp" id="nt-c1" value="#ff4444"></div>
+            <div><label class="lbl">Alt</label><input type="color" class="color-inp" id="nt-c2" value="#ffffff"></div>
+          </div>
+          <button class="ab suc" onclick="addTeam()">+ Add Team</button>
+        </div>
+        <div class="card">
+          <div class="card-title">All Teams</div>
+          <div class="team-list" id="team-list"></div>
+        </div>
+      </div>
+
+      <!-- PASSWORDS -->
+      <div class="tc" id="tc-passwords">
+        <div class="card">
+          <div class="card-title">🔐 Referee Passwords</div>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:18px;line-height:1.6">
+            Set unique passwords for each referee. They enter this on their phone to unlock their court's control panel. Changes sync to Firebase instantly.
+          </p>
+          <label class="lbl">Ref A Password (Court A)</label>
+          <div class="row">
+            <div class="field"><input type="text" class="inp" id="pw-a" placeholder="e.g. CourtA2024" style="margin-bottom:0;letter-spacing:2px;font-weight:700"></div>
+            <button class="ab pri" onclick="savePW('a')">Save</button>
+          </div>
+          <label class="lbl" style="margin-top:6px">Ref B Password (Court B)</label>
+          <div class="row">
+            <div class="field"><input type="text" class="inp" id="pw-b" placeholder="e.g. CourtB2024" style="margin-bottom:0;letter-spacing:2px;font-weight:700"></div>
+            <button class="ab pri" onclick="savePW('b')">Save</button>
+          </div>
+          <div class="pw-info" style="margin-top:16px">
+            <strong>How it works:</strong><br>
+            📱 <strong>Ref A</strong> opens the URL on their phone → clicks "Ref A" → enters their password<br>
+            📱 <strong>Ref B</strong> opens the URL on their phone → clicks "Ref B" → enters their password<br>
+            📺 <strong>Display</strong> screen is shown on big screen/projector (use the ⛶ fullscreen button)<br><br>
+            All changes appear on the display <strong>instantly</strong> via Firebase.
+          </div>
+        </div>
+      </div>
+
+      <!-- BROADCAST -->
+      <div class="tc" id="tc-broadcast">
+        <div class="card">
+          <div class="card-title">Announcement Banner</div>
+          <label class="lbl">Message</label>
+          <textarea class="ta" id="ann-msg" placeholder="Type announcement..."></textarea>
+          <label class="lbl">Sponsor / Right text</label>
+          <input type="text" class="inp" id="ann-sponsor" placeholder="Powered by HoopBoard">
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <button class="ab pri" onclick="sendAnn()">Send to Banner</button>
+            <button class="ab" onclick="clearAnn()">Clear</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Manual Animations</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="ab war" onclick="trigAnim('a','pop')">Flash Score A</button>
+            <button class="ab war" onclick="trigAnim('b','pop')">Flash Score B</button>
+            <button class="ab suc" onclick="trigAnim('a','three')">3-Pointer A 🔥</button>
+            <button class="ab suc" onclick="trigAnim('b','three')">3-Pointer B 🔥</button>
+            <button class="ab dan" onclick="trigClutch('a')">Clutch A</button>
+            <button class="ab dan" onclick="trigClutch('b')">Clutch B</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SYSTEM -->
+      <div class="tc" id="tc-system">
+        <div class="card">
+          <div class="card-title">System</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+            <button class="ab dan" onclick="fullReset()">⚠️ Full Reset</button>
+            <button class="ab" onclick="exportJSON()">Export JSON</button>
+            <button class="ab" onclick="reconfigFirebase()">Re-configure Firebase</button>
+          </div>
+          <div>
+            <div class="sbadge">HoopBoard Pro v2.0</div>
+            <div class="sbadge" id="fb-status-badge">Firebase: Connecting…</div>
+            <div class="sbadge">Real-time sync</div>
+          </div>
+          <p style="margin-top:14px;font-size:12px;color:var(--muted);line-height:1.7">
+            Deploy this single <code>index.html</code> to Vercel. All devices connect to the same Firebase database. Refs log in from their phones, the display screen goes fullscreen on the big TV.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<!-- ══════════════════════════════════════════
+     FIREBASE SDK
+══════════════════════════════════════════ -->
+<script type="module">
+import { initializeApp }                     from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getDatabase, ref, set, onValue, get }
+  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+
+// ════════════════════════════════════════════
+//  DEFAULT DATA
+// ════════════════════════════════════════════
+const DEFAULT_TEAMS = [
+  {id:'t1',name:'Bulls',   c1:'#cc0000',c2:'#ffffff'},
+  {id:'t2',name:'Lakers',  c1:'#552583',c2:'#FDB927'},
+  {id:'t3',name:'Warriors',c1:'#1D428A',c2:'#FFC72C'},
+  {id:'t4',name:'Celtics', c1:'#007A33',c2:'#ffffff'},
+  {id:'t5',name:'Heat',    c1:'#98002E',c2:'#F9A01B'},
+  {id:'t6',name:'Nets',    c1:'#cccccc',c2:'#000000'},
+];
+const mkCourt = () => ({
+  t1:'t1',t2:'t2',s1:0,s2:0,f1:0,f2:0,
+  q:1,qDur:10,secs:600,running:false,poss:0,mom:50,history:[]
+});
+const DEFAULT_STATE = {
+  teams: DEFAULT_TEAMS,
+  courts: { a: {...mkCourt(), t1:'t1',t2:'t2'}, b: {...mkCourt(), t1:'t3',t2:'t4'} },
+  banner: 'Welcome to HoopBoard Pro — Real-Time Basketball Scoreboard',
+  sponsor: 'Powered by HoopBoard',
+  passwords: { a: 'refa', b: 'refb' },
+};
+
+// ════════════════════════════════════════════
+//  STATE
+// ════════════════════════════════════════════
+let S    = JSON.parse(JSON.stringify(DEFAULT_STATE));
+let db   = null;
+let dbRef = null;
+let timers = { a: null, b: null };
+let loggedIn = { a: false, b: false };
+let ignoreNextRemote = false; // prevent echo
+
+// ════════════════════════════════════════════
+//  FIREBASE CONFIG
+// ════════════════════════════════════════════
+function loadFirebaseConfig() {
+  try { return JSON.parse(localStorage.getItem('hb_fb_cfg') || 'null'); }
+  catch(e) { return null; }
+}
+function saveFirebaseConfig() {
+  const url = document.getElementById('cfg-db-url').value.trim();
+  const key = document.getElementById('cfg-api-key').value.trim();
+  const pid = document.getElementById('cfg-project-id').value.trim();
+  const err = document.getElementById('cfg-err');
+  if (!url || !key || !pid) { err.textContent = 'Please fill in all three fields.'; return; }
+  if (!url.startsWith('https://')) { err.textContent = 'Database URL must start with https://'; return; }
+  const cfg = { databaseURL: url, apiKey: key, projectId: pid, appId: 'hoopboard' };
+  localStorage.setItem('hb_fb_cfg', JSON.stringify(cfg));
+  err.textContent = '';
+  launchApp(cfg);
+}
+window.saveFirebaseConfig = saveFirebaseConfig;
+
+function reconfigFirebase() {
+  localStorage.removeItem('hb_fb_cfg');
+  location.reload();
+}
+window.reconfigFirebase = reconfigFirebase;
+
+// ════════════════════════════════════════════
+//  LAUNCH
+// ════════════════════════════════════════════
+function launchApp(cfg) {
+  document.getElementById('cfg-banner').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+
+  try {
+    const app = initializeApp(cfg);
+    db = getDatabase(app);
+    dbRef = ref(db, 'hoopboard/state');
+
+    // Listen for remote changes
+    onValue(dbRef, snap => {
+      if (ignoreNextRemote) { ignoreNextRemote = false; return; }
+      const remote = snap.val();
+      if (remote) {
+        const prev = S;
+        S = remote;
+        // Sync timers
+        ['a','b'].forEach(c => {
+          if (S.courts[c].running && !timers[c]) startLocalTimer(c);
+          if (!S.courts[c].running && timers[c])  { clearInterval(timers[c]); timers[c]=null; }
+        });
+        renderAll();
+      }
+      setLive(true);
+      document.getElementById('fb-status-badge').textContent = 'Firebase: ✅ Connected';
+    }, err => {
+      setLive(false);
+      document.getElementById('fb-status-badge').textContent = 'Firebase: ❌ ' + err.message;
+    });
+
+    // Push initial state if DB is empty
+    get(dbRef).then(snap => {
+      if (!snap.exists()) pushState();
+      else { S = snap.val(); renderAll(); }
+    });
+
+  } catch(e) {
+    setLive(false);
+    toast('Firebase error: ' + e.message);
+    document.getElementById('fb-status-badge').textContent = 'Firebase: ❌ Error';
+  }
+}
+
+// ════════════════════════════════════════════
+//  PUSH STATE TO FIREBASE
+// ════════════════════════════════════════════
+function pushState() {
+  if (!db) return;
+  ignoreNextRemote = true;
+  set(dbRef, S).catch(e => { setLive(false); console.error(e); });
+}
+
+// ════════════════════════════════════════════
+//  LOGIN / LOGOUT
+// ════════════════════════════════════════════
+function doLogin(c) {
+  const pw = document.getElementById('li-'+c).value;
+  const correct = (S.passwords && S.passwords[c]) || (c==='a'?'refa':'refb');
+  if (pw === correct) {
+    loggedIn[c] = true;
+    document.getElementById('lg-'+c).style.display = 'none';
+    document.getElementById('rp-'+c).style.display = 'block';
+    document.getElementById('li-'+c).value = '';
+    document.getElementById('le-'+c).textContent = '';
+    renderRefPanel(c);
+    toast(`✅ Referee ${c.toUpperCase()} logged in`);
+  } else {
+    const inp = document.getElementById('li-'+c);
+    inp.value = '';
+    inp.classList.remove('shake'); void inp.offsetWidth; inp.classList.add('shake');
+    document.getElementById('le-'+c).textContent = '❌ Wrong password — try again';
+  }
+}
+function doLogout(c) {
+  loggedIn[c] = false;
+  document.getElementById('lg-'+c).style.display = 'flex';
+  document.getElementById('rp-'+c).style.display = 'none';
+  toast(`Referee ${c.toUpperCase()} logged out`);
+}
+function savePW(c) {
+  const pw = document.getElementById('pw-'+c).value.trim();
+  if (!pw) { toast('Password cannot be empty'); return; }
+  if (!S.passwords) S.passwords = {};
+  S.passwords[c] = pw;
+  pushState();
+  document.getElementById('pw-'+c).value = '';
+  toast(`✅ Ref ${c.toUpperCase()} password saved`);
+}
+window.doLogin  = doLogin;
+window.doLogout = doLogout;
+window.savePW   = savePW;
+
+// ════════════════════════════════════════════
+//  GAME ACTIONS
+// ════════════════════════════════════════════
+function addScore(c, team, pts) {
+  const ct = S.courts[c];
+  if (team===1) ct.s1+=pts; else ct.s2+=pts;
+  const tot = ct.s1+ct.s2;
+  if (tot>0) ct.mom = Math.round((ct.s1/tot)*100);
+  ct.history.push({team,pts,t:ct.secs});
+  pushState(); renderAll();
+  // animate on display
+  const el = g(`ts-${c}${team}`);
+  el.classList.remove('pop','three'); void el.offsetWidth;
+  el.classList.add(pts===3?'three':'pop');
+  toast(`+${pts} → ${team===1?getTeam(ct.t1).name:getTeam(ct.t2).name}`);
+}
+function undoScore(c, team) {
+  const ct = S.courts[c];
+  if (team===1 && ct.s1>0) ct.s1--;
+  else if (team===2 && ct.s2>0) ct.s2--;
+  const tot = ct.s1+ct.s2;
+  ct.mom = tot>0 ? Math.round((ct.s1/tot)*100) : 50;
+  pushState(); renderAll(); toast('Score corrected');
+}
+function addFoul(c, team) {
+  const ct = S.courts[c];
+  if (team===1) ct.f1=Math.min(ct.f1+1,5);
+  else ct.f2=Math.min(ct.f2+1,5);
+  pushState(); renderAll(); toast(`Foul — Team ${team}`);
+}
+function togglePoss(c) {
+  S.courts[c].poss = (S.courts[c].poss%2)+1;
+  pushState(); renderAll();
+}
+function toggleTimer(c) {
+  const ct = S.courts[c];
+  if (ct.running) {
+    ct.running = false;
+    clearInterval(timers[c]); timers[c]=null;
+  } else {
+    ct.running = true;
+    startLocalTimer(c);
+  }
+  pushState(); renderAll();
+}
+function startLocalTimer(c) {
+  if (timers[c]) clearInterval(timers[c]);
+  timers[c] = setInterval(() => {
+    if (!S.courts[c].running) { clearInterval(timers[c]); timers[c]=null; return; }
+    if (S.courts[c].secs > 0) {
+      S.courts[c].secs--;
+      pushState();
+      renderDisplay(); renderRefPanel(c);
+    } else {
+      S.courts[c].running = false;
+      clearInterval(timers[c]); timers[c]=null;
+      pushState(); renderAll();
+      toast(`⏱ End of Q${S.courts[c].q} — Court ${c.toUpperCase()}`);
+    }
+  }, 1000);
+}
+function nextQ(c) {
+  const ct = S.courts[c];
+  ct.running = false; clearInterval(timers[c]); timers[c]=null;
+  if (ct.q<4) ct.q++;
+  ct.secs = ct.qDur*60; ct.f1=0; ct.f2=0;
+  pushState(); renderAll(); toast(`Q${ct.q} — Court ${c.toUpperCase()}`);
+}
+function applyQDur(c) {
+  const dur = parseInt(document.getElementById(`a${c}-qdur`).value);
+  S.courts[c].qDur = dur;
+  S.courts[c].secs = dur*60;
+  pushState(); renderAll();
+}
+function applyTeams() {
+  S.courts.a.t1 = document.getElementById('aa-t1').value;
+  S.courts.a.t2 = document.getElementById('aa-t2').value;
+  S.courts.b.t1 = document.getElementById('ab-t1').value;
+  S.courts.b.t2 = document.getElementById('ab-t2').value;
+  pushState(); renderAll();
+}
+function ovScore(c, team) {
+  const v = parseInt(document.getElementById(`ov-${c}-s${team}`).value)||0;
+  const ct = S.courts[c];
+  if (team===1) ct.s1=v; else ct.s2=v;
+  const tot=ct.s1+ct.s2;
+  ct.mom = tot>0?Math.round((ct.s1/tot)*100):50;
+  pushState(); renderAll(); toast('Score overridden');
+}
+function ovClock(c) {
+  const v = document.getElementById(`ov-${c}-clk`).value;
+  const p = v.split(':');
+  if (p.length===2) {
+    S.courts[c].secs = parseInt(p[0])*60+parseInt(p[1]);
+    pushState(); renderAll(); toast('Clock updated');
+  }
+}
+function startGame(c) {
+  applyTeams();
+  const ct = S.courts[c];
+  Object.assign(ct,{s1:0,s2:0,f1:0,f2:0,q:1,secs:ct.qDur*60,running:false,poss:0,mom:50,history:[]});
+  clearInterval(timers[c]); timers[c]=null;
+  pushState(); renderAll(); toast(`🏀 Court ${c.toUpperCase()} game started!`);
+}
+function resetGame(c) {
+  const ct = S.courts[c];
+  Object.assign(ct,{s1:0,s2:0,f1:0,f2:0,q:1,secs:ct.qDur*60,running:false,poss:0,mom:50,history:[]});
+  clearInterval(timers[c]); timers[c]=null;
+  pushState(); renderAll(); toast(`Court ${c.toUpperCase()} reset`);
+}
+function swapTeams(c) {
+  const ct = S.courts[c];
+  [ct.t1,ct.t2]=[ct.t2,ct.t1];
+  [ct.s1,ct.s2]=[ct.s2,ct.s1];
+  [ct.f1,ct.f2]=[ct.f2,ct.f1];
+  ct.mom=100-ct.mom;
+  pushState(); renderAll(); toast('Teams swapped');
+}
+function addTeam() {
+  const name = document.getElementById('nt-name').value.trim();
+  if (!name) return;
+  S.teams.push({id:'t'+Date.now(), name, c1:document.getElementById('nt-c1').value, c2:document.getElementById('nt-c2').value});
+  document.getElementById('nt-name').value='';
+  pushState(); renderAll(); toast(`Team "${name}" added`);
+}
+function deleteTeam(id) {
+  S.teams = S.teams.filter(t=>t.id!==id);
+  pushState(); renderAll(); toast('Team removed');
+}
+function sendAnn() {
+  S.banner  = document.getElementById('ann-msg').value     || S.banner;
+  S.sponsor = document.getElementById('ann-sponsor').value || S.sponsor;
+  pushState(); renderAll(); toast('Banner updated');
+}
+function clearAnn() {
+  S.banner='HoopBoard Pro — Live Basketball Scoreboard';
+  pushState(); renderAll();
+}
+function trigAnim(c,type) {
+  ['1','2'].forEach(n=>{
+    const el=g(`ts-${c}${n}`);
+    el.classList.remove('pop','three'); void el.offsetWidth; el.classList.add(type);
+  });
+}
+function trigClutch(c) {
+  const ov=g(`cov-${c}`);
+  ov.classList.add('on');
+  setTimeout(()=>ov.classList.remove('on'),5000);
+}
+function fullReset() {
+  if (!confirm('Reset everything? This cannot be undone.')) return;
+  ['a','b'].forEach(c=>{clearInterval(timers[c]);timers[c]=null;});
+  S = JSON.parse(JSON.stringify(DEFAULT_STATE));
+  pushState(); renderAll(); toast('Full system reset');
+}
+function exportJSON() {
+  const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download='hoopboard_state.json'; a.click();
+}
+
+// expose to onclick
+window.addScore=addScore; window.undoScore=undoScore; window.addFoul=addFoul;
+window.togglePoss=togglePoss; window.toggleTimer=toggleTimer; window.nextQ=nextQ;
+window.applyQDur=applyQDur; window.applyTeams=applyTeams;
+window.ovScore=ovScore; window.ovClock=ovClock;
+window.startGame=startGame; window.resetGame=resetGame; window.swapTeams=swapTeams;
+window.addTeam=addTeam; window.deleteTeam=deleteTeam;
+window.sendAnn=sendAnn; window.clearAnn=clearAnn;
+window.trigAnim=trigAnim; window.trigClutch=trigClutch;
+window.fullReset=fullReset; window.exportJSON=exportJSON;
+
+// ════════════════════════════════════════════
+//  RENDER
+// ════════════════════════════════════════════
+function getTeam(id) { return S.teams.find(t=>t.id===id) || {name:'TBD',c1:'#888',c2:'#fff'}; }
+function fmt(secs)    { const m=Math.floor(secs/60),s=secs%60; return `${m}:${s<10?'0':''}${s}`; }
+function g(id)        { return document.getElementById(id); }
+
+function renderAll() {
+  renderDisplay();
+  renderRefPanel('a');
+  renderRefPanel('b');
+  renderDropdowns();
+  renderTeamList();
+}
+
+function renderDisplay() {
+  ['a','b'].forEach(c => {
+    const ct=S.courts[c];
+    const t1=getTeam(ct.t1), t2=getTeam(ct.t2);
+    g(`tn-${c}1`).textContent = t1.name;
+    g(`tn-${c}2`).textContent = t2.name;
+    g(`ts-${c}1`).textContent = ct.s1;
+    g(`ts-${c}2`).textContent = ct.s2;
+    g(`tcb-${c}1`).style.background = t1.c1;
+    g(`tcb-${c}2`).style.background = t2.c1;
+    g(`qb-${c}`).textContent   = `Q${ct.q}`;
+    g(`cl-${c}`).textContent   = fmt(ct.secs);
+    const clutch = ct.secs<=120 && ct.running;
+    g(`cl-${c}`).className     = 'clock' + (clutch?' clutch':'');
+    g(`cov-${c}`).className    = 'clutch-ov' + (clutch?' on':'');
+    // possession
+    const pd = g(`pd-${c}`);
+    if (ct.poss===1)      { pd.style.visibility='visible'; pd.style.background=t1.c1; }
+    else if (ct.poss===2) { pd.style.visibility='visible'; pd.style.background=t2.c1; }
+    else                  { pd.style.visibility='hidden'; }
+    // fouls
+    renderFouls(`fr-${c}1`, ct.f1);
+    renderFouls(`fr-${c}2`, ct.f2);
+    // momentum
+    g(`mf-${c}`).style.width = ct.mom+'%';
+    // close-game flex
+    const diff = Math.abs(ct.s1-ct.s2);
+    g(`cp-${c}`).className = `court-panel court-${c}` + (diff<=5&&(ct.s1+ct.s2)>0?' close-game':'');
+  });
+  g('banner-msg').textContent     = S.banner  || 'HoopBoard Pro';
+  g('banner-sponsor').textContent = S.sponsor || '';
+}
+
+function renderFouls(elId, count) {
+  const el=g(elId); if(!el)return; el.innerHTML='';
+  for(let i=0;i<5;i++){const d=document.createElement('div');d.className='foul-dot'+(i<count?' on':'');el.appendChild(d);}
+}
+
+function renderRefPanel(c) {
+  const ct=S.courts[c];
+  const t1=getTeam(ct.t1), t2=getTeam(ct.t2);
+  const safe = id => { const e=g(id); if(e) return e; return {textContent:'',className:'',style:{}}; };
+  safe(`rn-${c}1`).textContent = t1.name;
+  safe(`rn-${c}2`).textContent = t2.name;
+  safe(`rs-${c}1`).textContent = ct.s1;
+  safe(`rs-${c}2`).textContent = ct.s2;
+  safe(`rc-${c}`).textContent  = fmt(ct.secs);
+  safe(`rq-${c}`).textContent  = `Q${ct.q}`;
+  const btn = g(`tb-${c}`);
+  if (btn) {
+    if (ct.running) { btn.textContent='⏸ Pause'; btn.className='cb pa'; }
+    else            { btn.textContent='▶ Start'; btn.className='cb go'; }
+  }
+  const dot=g(`sd-${c}`), stxt=g(`st-${c}`);
+  if (dot && stxt) {
+    if (ct.running)            { dot.className='sdot live';   stxt.textContent='LIVE'; }
+    else if (ct.s1+ct.s2>0)   { dot.className='sdot paused'; stxt.textContent='Paused'; }
+    else                       { dot.className='sdot';        stxt.textContent='Ready'; }
+  }
+}
+
+function renderDropdowns() {
+  const fill = (selId, curVal) => {
+    const sel=g(selId); if(!sel)return;
+    sel.innerHTML=S.teams.map(t=>`<option value="${t.id}"${t.id===curVal?' selected':''}>${t.name}</option>`).join('');
+  };
+  fill('aa-t1', S.courts.a.t1); fill('aa-t2', S.courts.a.t2);
+  fill('ab-t1', S.courts.b.t1); fill('ab-t2', S.courts.b.t2);
+}
+
+function renderTeamList() {
+  const el=g('team-list'); if(!el)return;
+  el.innerHTML=S.teams.map(t=>`
+    <div class="team-item">
+      <div class="tdot" style="background:${t.c1}"></div>
+      <div class="tname">${t.name}</div>
+      <div style="font-size:11px;color:var(--muted)">${t.c1}</div>
+      <button class="xbtn" onclick="deleteTeam('${t.id}')">✕</button>
+    </div>`).join('');
+}
+
+// ════════════════════════════════════════════
+//  NAV & UI
+// ════════════════════════════════════════════
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  g(`page-${name}`).classList.add('active');
+  const map={display:'nb-display','ref-a':'nb-ref-a','ref-b':'nb-ref-b',admin:'nb-admin'};
+  if(map[name]) g(map[name]).classList.add('active');
+}
+function aTab(name, btn) {
+  document.querySelectorAll('.tc').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  g(`tc-${name}`).classList.add('on');
+  btn.classList.add('on');
+}
+function setLive(on) {
+  const p=g('live-pill'), t=g('live-txt');
+  if(on){p.className='live-pill';t.textContent='LIVE';}
+  else  {p.className='live-pill offline';t.textContent='OFFLINE';}
+}
+function toggleFS() {
+  const el=document.getElementById('page-display');
+  if(!document.fullscreenElement){
+    (el.requestFullscreen||el.webkitRequestFullscreen).call(el);
+  } else {
+    (document.exitFullscreen||document.webkitExitFullscreen).call(document);
+  }
+}
+function toast(msg) {
+  const t=g('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(window._toastT);
+  window._toastT=setTimeout(()=>t.classList.remove('show'),2400);
+}
+window.showPage=showPage; window.aTab=aTab; window.toggleFS=toggleFS;
+
+// ════════════════════════════════════════════
+//  BOOT
+// ════════════════════════════════════════════
+const savedCfg = loadFirebaseConfig();
+if (savedCfg) launchApp(savedCfg);
+// else: config overlay stays visible
+
+</script>
+</body>
+</html>
