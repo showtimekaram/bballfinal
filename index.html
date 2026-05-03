@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Annual Osrah Basketball Competition</title>
+  <title>HoopBoard Pro</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap"
     rel="stylesheet">
@@ -14,7 +14,7 @@
     *::after {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+      box-sizing: border-box
     }
 
     :root {
@@ -38,13 +38,13 @@
     html,
     body {
       height: 100%;
-      overflow: hidden;
+      overflow: hidden
     }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: var(--font-b);
+      font-family: var(--font-b)
     }
 
     /* FULLSCREEN */
@@ -73,6 +73,7 @@
       align-items: center;
       gap: 8px;
       z-index: 100;
+      flex-shrink: 0
     }
 
     .logo {
@@ -81,12 +82,12 @@
       font-weight: 900;
       letter-spacing: 1px;
       color: var(--accent);
-      flex-shrink: 0;
+      flex-shrink: 0
     }
 
     .logo em {
       color: #fff;
-      font-style: normal;
+      font-style: normal
     }
 
     .live-pill {
@@ -96,12 +97,12 @@
       background: rgba(0, 232, 122, .08);
       border: 1px solid rgba(0, 232, 122, .25);
       border-radius: 20px;
-      padding: 4px 9px;
+      padding: 3px 9px;
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 2px;
       color: var(--green);
-      flex-shrink: 0;
+      flex-shrink: 0
     }
 
     .live-dot {
@@ -109,18 +110,18 @@
       height: 6px;
       border-radius: 50%;
       background: var(--green);
-      animation: blink 1.8s infinite;
+      animation: blink 1.8s infinite
     }
 
     .live-pill.offline {
       color: var(--muted);
       border-color: var(--border);
-      background: transparent;
+      background: transparent
     }
 
     .live-pill.offline .live-dot {
       background: var(--muted);
-      animation: none;
+      animation: none
     }
 
     @keyframes blink {
@@ -140,77 +141,78 @@
       display: flex;
       gap: 5px;
       align-items: center;
+      flex-wrap: nowrap
     }
 
     .nav-btn {
       background: transparent;
       border: 1px solid var(--border);
       color: var(--muted);
-      padding: 6px 11px;
+      padding: 5px 10px;
       border-radius: 7px;
       cursor: pointer;
       font-family: var(--font-b);
       font-size: 12px;
       font-weight: 600;
       transition: all .18s;
-      white-space: nowrap;
+      white-space: nowrap
     }
 
     .nav-btn:hover {
       background: var(--surface2);
       color: var(--text);
-      border-color: var(--border2);
+      border-color: var(--border2)
     }
 
     .nav-btn.active {
       background: var(--surface2);
       border-color: var(--accent);
-      color: var(--accent);
+      color: var(--accent)
     }
 
     .nav-btn.ref-a.active {
       border-color: var(--a-color);
-      color: var(--a-color);
+      color: var(--a-color)
     }
 
     .nav-btn.ref-b.active {
       border-color: var(--b-color);
-      color: var(--b-color);
+      color: var(--b-color)
     }
 
     .nav-btn.lb-btn.active {
       border-color: var(--gold);
-      color: var(--gold);
+      color: var(--gold)
     }
 
     .nav-btn.fs-btn {
-      font-size: 15px;
-      padding: 6px 9px;
+      font-size: 14px;
+      padding: 5px 8px
     }
 
     /* PAGES */
     .page {
       display: none;
       height: calc(100vh - 52px);
-      overflow-y: auto;
+      overflow-y: auto
     }
 
     .page.active {
-      display: block;
+      display: block
     }
 
-    /* ── DISPLAY ── */
+    /* DISPLAY */
     .display-wrap {
       display: flex;
       flex-direction: column;
       height: calc(100vh - 52px);
-      background: var(--bg);
+      background: var(--bg)
     }
 
     .courts-row {
       display: flex;
       flex: 1;
-      overflow: hidden;
+      overflow: hidden
     }
 
     .court-panel {
@@ -218,18 +220,18 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 24px 28px;
+      padding: 22px 26px;
       position: relative;
       overflow: hidden;
-      transition: flex .6s cubic-bezier(.4, 0, .2, 1);
+      transition: flex .6s cubic-bezier(.4, 0, .2, 1)
     }
 
     .court-panel.close-game {
-      flex: 1.18;
+      flex: 1.18
     }
 
     .court-a {
-      border-right: 1px solid var(--border);
+      border-right: 1px solid var(--border)
     }
 
     .court-a::before {
@@ -237,7 +239,7 @@
       position: absolute;
       inset: 0;
       background: radial-gradient(ellipse 80% 60% at 20% 50%, rgba(255, 64, 64, .04), transparent 70%);
-      pointer-events: none;
+      pointer-events: none
     }
 
     .court-b::before {
@@ -245,7 +247,7 @@
       position: absolute;
       inset: 0;
       background: radial-gradient(ellipse 80% 60% at 80% 50%, rgba(58, 159, 255, .04), transparent 70%);
-      pointer-events: none;
+      pointer-events: none
     }
 
     .court-label {
@@ -254,61 +256,61 @@
       font-weight: 800;
       letter-spacing: 4px;
       text-transform: uppercase;
-      margin-bottom: 18px;
-      opacity: .45;
+      margin-bottom: 16px;
+      opacity: .45
     }
 
     .court-a .court-label {
-      color: var(--a-color);
+      color: var(--a-color)
     }
 
     .court-b .court-label {
-      color: var(--b-color);
+      color: var(--b-color)
     }
 
     .team-row {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 5px;
+      gap: 11px;
+      margin-bottom: 5px
     }
 
     .team-color-bar {
       width: 5px;
       border-radius: 3px;
-      height: 48px;
+      height: 46px;
       flex-shrink: 0;
-      transition: background .4s;
+      transition: background .4s
     }
 
     .team-name {
       font-family: var(--font-d);
-      font-size: clamp(20px, 3.5vw, 40px);
+      font-size: clamp(18px, 3.2vw, 38px);
       font-weight: 800;
       letter-spacing: .3px;
       flex: 1;
       white-space: nowrap;
       overflow: hidden;
-      text-overflow: ellipsis;
+      text-overflow: ellipsis
     }
 
     .team-score {
       font-family: var(--font-d);
-      font-size: clamp(56px, 9.5vw, 104px);
+      font-size: clamp(52px, 9vw, 100px);
       font-weight: 900;
       line-height: 1;
       letter-spacing: -3px;
-      min-width: 100px;
+      min-width: 95px;
       text-align: right;
-      transition: color .2s;
+      transition: color .2s
     }
 
     .team-score.pop {
-      animation: scorePop .5s cubic-bezier(.3, 1.6, .4, 1);
+      animation: scorePop .5s cubic-bezier(.3, 1.6, .4, 1)
     }
 
     .team-score.three {
-      animation: threePop .7s cubic-bezier(.3, 1.8, .4, 1);
+      animation: threePop .7s cubic-bezier(.3, 1.8, .4, 1)
     }
 
     @keyframes scorePop {
@@ -350,46 +352,46 @@
     .divider {
       height: 1px;
       background: var(--border);
-      margin: 12px 0;
-      opacity: .35;
+      margin: 11px 0;
+      opacity: .35
     }
 
     .fouls-row {
       display: flex;
       gap: 6px;
-      margin: 2px 0;
+      margin: 2px 0
     }
 
     .foul-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--border2);
+      background: var(--border2)
     }
 
     .foul-dot.on {
       background: #ff6b35;
-      box-shadow: 0 0 6px #ff6b3566;
+      box-shadow: 0 0 6px #ff6b3566
     }
 
     .clock-area {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-top: 12px;
+      gap: 11px;
+      margin-top: 11px
     }
 
     .clock {
       font-family: var(--font-d);
-      font-size: clamp(32px, 5vw, 68px);
+      font-size: clamp(30px, 4.8vw, 64px);
       font-weight: 700;
       letter-spacing: 3px;
-      font-variant-numeric: tabular-nums;
+      font-variant-numeric: tabular-nums
     }
 
     .clock.clutch {
       color: var(--red);
-      animation: pulse 1.2s infinite;
+      animation: pulse 1.2s infinite
     }
 
     @keyframes pulse {
@@ -406,14 +408,14 @@
 
     .qbadge {
       font-family: var(--font-d);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       letter-spacing: 2px;
       background: var(--surface2);
       border: 1px solid var(--border2);
       border-radius: 7px;
-      padding: 6px 12px;
-      color: var(--muted);
+      padding: 5px 11px;
+      color: var(--muted)
     }
 
     .poss-dot {
@@ -423,7 +425,7 @@
       background: var(--gold);
       margin-left: auto;
       animation: possGlow 2s infinite;
-      visibility: hidden;
+      visibility: hidden
     }
 
     @keyframes possGlow {
@@ -439,7 +441,7 @@
     }
 
     .mom-bar {
-      margin-top: 14px;
+      margin-top: 12px
     }
 
     .mom-label {
@@ -447,7 +449,7 @@
       letter-spacing: 3px;
       color: var(--muted);
       margin-bottom: 4px;
-      text-transform: uppercase;
+      text-transform: uppercase
     }
 
     .mom-track {
@@ -455,7 +457,7 @@
       background: var(--surface2);
       border-radius: 3px;
       position: relative;
-      overflow: hidden;
+      overflow: hidden
     }
 
     .mom-fill {
@@ -464,7 +466,7 @@
       position: absolute;
       left: 0;
       top: 0;
-      transition: width .9s ease;
+      transition: width .9s ease
     }
 
     .mom-center {
@@ -474,7 +476,7 @@
       width: 2px;
       height: 7px;
       background: var(--border2);
-      transform: translateX(-50%);
+      transform: translateX(-50%)
     }
 
     .clutch-ov {
@@ -483,22 +485,22 @@
       background: radial-gradient(ellipse at center, rgba(255, 53, 53, .07), transparent 68%);
       pointer-events: none;
       opacity: 0;
-      transition: opacity .5s;
+      transition: opacity .5s
     }
 
     .clutch-ov.on {
-      opacity: 1;
+      opacity: 1
     }
 
     .banner {
       background: var(--surface);
       border-top: 1px solid var(--border);
-      padding: 10px 24px;
+      padding: 9px 22px;
       display: flex;
       align-items: center;
-      gap: 14px;
-      min-height: 44px;
-      flex-shrink: 0;
+      gap: 12px;
+      min-height: 42px;
+      flex-shrink: 0
     }
 
     .banner-tag {
@@ -508,74 +510,183 @@
       color: var(--accent);
       font-weight: 800;
       flex-shrink: 0;
-      text-transform: uppercase;
+      text-transform: uppercase
     }
 
     .banner-msg {
       font-family: var(--font-d);
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
-      flex: 1;
+      flex: 1
     }
 
     .banner-sponsor {
       font-size: 12px;
       color: var(--muted);
-      flex-shrink: 0;
+      flex-shrink: 0
     }
 
-    /* ── LEADERBOARD ── */
-    .lb-wrap {
-      max-width: 760px;
+    /* ── LEADERBOARD PAGE ── */
+    .lb-page-wrap {
+      max-width: 800px;
       margin: 0 auto;
-      padding: 24px 16px 40px;
+      padding: 20px 14px 40px
     }
 
-    .lb-header {
+    .lb-page-header {
+      margin-bottom: 18px
+    }
+
+    .lb-page-title {
+      font-family: var(--font-d);
+      font-size: 30px;
+      font-weight: 900;
+      margin-bottom: 6px
+    }
+
+    .lb-page-title span {
+      color: var(--gold)
+    }
+
+    /* Grade tabs strip */
+    .grade-tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--surface2);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 20px;
+      overflow-x: auto
+    }
+
+    .grade-tab {
+      flex: 1;
+      min-width: 70px;
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      padding: 10px 8px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-family: var(--font-d);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      transition: all .18s;
+      white-space: nowrap;
+      text-align: center
+    }
+
+    .grade-tab:hover {
+      color: var(--text)
+    }
+
+    .grade-tab.on {
+      background: var(--surface);
+      color: var(--text);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, .5)
+    }
+
+    .grade-tab.g6.on {
+      color: #ff6b6b
+    }
+
+    .grade-tab.g7.on {
+      color: #ffa94d
+    }
+
+    .grade-tab.g8.on {
+      color: #ffd43b
+    }
+
+    .grade-tab.g9.on {
+      color: #69db7c
+    }
+
+    .grade-tab.g10.on {
+      color: #74c0fc
+    }
+
+    /* per-grade content */
+    .grade-content {
+      display: none
+    }
+
+    .grade-content.on {
+      display: block
+    }
+
+    .grade-hero {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
-      gap: 10px;
+      gap: 14px;
+      margin-bottom: 16px;
+      padding: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px
     }
 
-    .lb-title {
+    .grade-badge {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: var(--font-d);
-      font-size: 32px;
+      font-size: 22px;
       font-weight: 900;
+      color: #fff;
+      flex-shrink: 0
     }
 
-    .lb-title span {
-      color: var(--gold);
+    .grade-badge.g6 {
+      background: linear-gradient(135deg, #ff6b6b, #c92a2a)
     }
 
-    .lb-subtitle {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 2px;
+    .grade-badge.g7 {
+      background: linear-gradient(135deg, #ffa94d, #e67700)
     }
 
-    .lb-season {
+    .grade-badge.g8 {
+      background: linear-gradient(135deg, #ffd43b, #f08c00)
+    }
+
+    .grade-badge.g9 {
+      background: linear-gradient(135deg, #69db7c, #2f9e44)
+    }
+
+    .grade-badge.g10 {
+      background: linear-gradient(135deg, #74c0fc, #1971c2)
+    }
+
+    .grade-hero-info h2 {
       font-family: var(--font-d);
-      font-size: 13px;
-      color: var(--muted);
-      letter-spacing: 2px;
-      text-align: right;
+      font-size: 24px;
+      font-weight: 900;
+      margin-bottom: 2px
     }
 
+    .grade-hero-info p {
+      font-size: 13px;
+      color: var(--muted)
+    }
+
+    /* standings table */
     .lb-table-wrap {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 14px;
       overflow: hidden;
+      margin-bottom: 16px
     }
 
     .lb-thead {
       display: grid;
-      grid-template-columns: 44px 1fr 52px 52px 52px 70px 60px;
+      grid-template-columns: 42px 1fr 50px 50px 50px 68px 58px;
       background: var(--surface2);
-      border-bottom: 1px solid var(--border2);
+      border-bottom: 1px solid var(--border2)
     }
 
     .lb-th {
@@ -585,53 +696,53 @@
       font-weight: 800;
       color: var(--muted);
       text-transform: uppercase;
-      padding: 10px 12px;
-      text-align: center;
+      padding: 10px 10px;
+      text-align: center
     }
 
     .lb-th:nth-child(2) {
-      text-align: left;
+      text-align: left
     }
 
     .lb-row {
       display: grid;
-      grid-template-columns: 44px 1fr 52px 52px 52px 70px 60px;
+      grid-template-columns: 42px 1fr 50px 50px 50px 68px 58px;
       border-bottom: 1px solid var(--border);
       cursor: pointer;
       transition: background .15s;
-      position: relative;
+      position: relative
     }
 
     .lb-row:last-child {
-      border-bottom: none;
+      border-bottom: none
     }
 
     .lb-row:hover {
-      background: var(--surface2);
+      background: var(--surface2)
     }
 
     .lb-row.rank-1 {
-      background: linear-gradient(90deg, rgba(255, 200, 64, .07), transparent);
+      background: linear-gradient(90deg, rgba(255, 200, 64, .07), transparent)
     }
 
     .lb-row.rank-2 {
-      background: linear-gradient(90deg, rgba(200, 200, 200, .04), transparent);
+      background: linear-gradient(90deg, rgba(200, 200, 200, .04), transparent)
     }
 
     .lb-row.rank-3 {
-      background: linear-gradient(90deg, rgba(200, 120, 60, .04), transparent);
+      background: linear-gradient(90deg, rgba(200, 120, 60, .04), transparent)
     }
 
     .lb-td {
-      padding: 14px 12px;
+      padding: 13px 10px;
       display: flex;
       align-items: center;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 500
     }
 
     .lb-td.center {
-      justify-content: center;
+      justify-content: center
     }
 
     .lb-td.rank-num {
@@ -639,120 +750,120 @@
       font-size: 20px;
       font-weight: 900;
       color: var(--muted);
-      justify-content: center;
+      justify-content: center
     }
 
     .rank-1 .lb-td.rank-num {
-      color: var(--gold);
+      color: var(--gold)
     }
 
     .rank-2 .lb-td.rank-num {
-      color: #c0c0c0;
+      color: #c0c0c0
     }
 
     .rank-3 .lb-td.rank-num {
-      color: #cd7f32;
+      color: #cd7f32
     }
 
     .team-cell {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 9px
     }
 
     .team-blob {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--font-d);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 900;
-      color: #fff;
+      color: #fff
     }
 
     .team-cell-name {
       font-family: var(--font-d);
-      font-size: 18px;
-      font-weight: 800;
+      font-size: 17px;
+      font-weight: 800
     }
 
     .team-cell-sub {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .w-num {
-      font-family: var(--font-d);
-      font-size: 22px;
-      font-weight: 900;
-      color: var(--green);
-    }
-
-    .l-num {
-      font-family: var(--font-d);
-      font-size: 22px;
-      font-weight: 900;
-      color: var(--red);
-    }
-
-    .diff-pos {
-      font-family: var(--font-d);
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--green);
-    }
-
-    .diff-neg {
-      font-family: var(--font-d);
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--red);
-    }
-
-    .diff-zero {
-      font-family: var(--font-d);
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--muted);
+      font-size: 10px;
+      color: var(--muted)
     }
 
     .pct-bar-wrap {
-      width: 60px;
+      width: 54px;
       height: 3px;
       background: var(--border2);
       border-radius: 2px;
-      margin-top: 3px;
-      overflow: hidden;
+      margin-top: 2px;
+      overflow: hidden
     }
 
     .pct-bar-fill {
       height: 100%;
       background: var(--green);
       border-radius: 2px;
-      transition: width .6s ease;
+      transition: width .6s ease
+    }
+
+    .w-num {
+      font-family: var(--font-d);
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--green)
+    }
+
+    .l-num {
+      font-family: var(--font-d);
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--red)
+    }
+
+    .diff-pos {
+      font-family: var(--font-d);
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--green)
+    }
+
+    .diff-neg {
+      font-family: var(--font-d);
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--red)
+    }
+
+    .diff-zero {
+      font-family: var(--font-d);
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--muted)
     }
 
     .lb-caret {
       position: absolute;
-      right: 14px;
+      right: 12px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--muted);
-      font-size: 13px;
+      font-size: 13px
     }
 
     .lb-empty {
-      padding: 40px;
+      padding: 32px;
       text-align: center;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 14px
     }
 
-    /* ── TEAM STATS MODAL ── */
+    /* STATS MODAL */
     .modal-bg {
       position: fixed;
       inset: 0;
@@ -764,12 +875,12 @@
       padding: 16px;
       opacity: 0;
       pointer-events: none;
-      transition: opacity .22s;
+      transition: opacity .22s
     }
 
     .modal-bg.open {
       opacity: 1;
-      pointer-events: all;
+      pointer-events: all
     }
 
     .modal {
@@ -777,43 +888,49 @@
       border: 1px solid var(--border2);
       border-radius: 18px;
       width: 100%;
-      max-width: 520px;
-      max-height: 90vh;
+      max-width: 500px;
+      max-height: 88vh;
       overflow-y: auto;
       transform: translateY(14px);
-      transition: transform .22s;
+      transition: transform .22s
     }
 
     .modal-bg.open .modal {
-      transform: translateY(0);
+      transform: translateY(0)
     }
 
     .modal-header {
       display: flex;
       align-items: center;
-      gap: 14px;
-      padding: 20px 22px 16px;
-      border-bottom: 1px solid var(--border);
+      gap: 12px;
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid var(--border)
     }
 
     .modal-blob {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
+      width: 46px;
+      height: 46px;
+      border-radius: 11px;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--font-d);
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 900;
-      color: #fff;
+      color: #fff
     }
 
     .modal-team-name {
       font-family: var(--font-d);
-      font-size: 28px;
-      font-weight: 900;
+      font-size: 26px;
+      font-weight: 900
+    }
+
+    .modal-grade-tag {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px
     }
 
     .modal-close {
@@ -821,44 +938,44 @@
       background: transparent;
       border: 1px solid var(--border2);
       color: var(--muted);
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       border-radius: 8px;
       cursor: pointer;
       font-size: 16px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: center
     }
 
     .modal-close:hover {
       border-color: var(--red);
-      color: var(--red);
+      color: var(--red)
     }
 
     .modal-body {
-      padding: 20px 22px;
+      padding: 18px 20px
     }
 
     .stat-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-bottom: 20px;
+      gap: 9px;
+      margin-bottom: 18px
     }
 
     .stat-box {
       background: var(--surface2);
       border-radius: 10px;
-      padding: 12px;
-      text-align: center;
+      padding: 11px;
+      text-align: center
     }
 
     .stat-val {
       font-family: var(--font-d);
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 900;
-      line-height: 1;
+      line-height: 1
     }
 
     .stat-lbl {
@@ -866,106 +983,106 @@
       letter-spacing: 2px;
       color: var(--muted);
       text-transform: uppercase;
-      margin-top: 4px;
+      margin-top: 3px
     }
 
     .game-log-title {
       font-family: var(--font-d);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 800;
       letter-spacing: 2px;
       color: var(--muted);
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 8px
     }
 
     .game-log-row {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
+      gap: 9px;
+      padding: 9px 11px;
       background: var(--surface2);
       border-radius: 9px;
-      margin-bottom: 7px;
+      margin-bottom: 6px
     }
 
-    .game-log-result {
+    .glr-result {
       font-family: var(--font-d);
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 900;
-      width: 22px;
-      text-align: center;
+      width: 20px;
+      text-align: center
     }
 
-    .game-log-result.W {
-      color: var(--green);
+    .glr-result.W {
+      color: var(--green)
     }
 
-    .game-log-result.L {
-      color: var(--red);
+    .glr-result.L {
+      color: var(--red)
     }
 
-    .game-log-teams {
+    .glr-teams {
       flex: 1;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 600
     }
 
-    .game-log-teams span {
+    .glr-teams span {
       color: var(--muted);
-      font-weight: 400;
+      font-weight: 400
     }
 
-    .game-log-score {
+    .glr-score {
       font-family: var(--font-d);
-      font-size: 16px;
-      font-weight: 800;
+      font-size: 15px;
+      font-weight: 800
     }
 
     .game-log-empty {
       color: var(--muted);
       font-size: 13px;
       text-align: center;
-      padding: 16px;
+      padding: 14px
     }
 
-    /* ── LOGIN ── */
+    /* LOGIN */
     .login-screen {
       display: flex;
       align-items: center;
       justify-content: center;
       min-height: 100%;
-      padding: 24px;
+      padding: 20px
     }
 
     .login-box {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 36px;
+      padding: 32px;
       width: 100%;
-      max-width: 380px;
-      text-align: center;
+      max-width: 370px;
+      text-align: center
     }
 
     .login-emoji {
-      font-size: 48px;
-      margin-bottom: 12px;
-      display: block;
+      font-size: 46px;
+      margin-bottom: 10px;
+      display: block
     }
 
     .login-title {
       font-family: var(--font-d);
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 900;
-      margin-bottom: 6px;
+      margin-bottom: 4px
     }
 
     .login-sub {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--muted);
-      margin-bottom: 24px;
-      line-height: 1.5;
+      margin-bottom: 22px;
+      line-height: 1.5
     }
 
     .login-input {
@@ -973,32 +1090,32 @@
       border: 1px solid var(--border2);
       color: var(--text);
       border-radius: 10px;
-      padding: 13px 16px;
-      font-size: 15px;
+      padding: 12px 15px;
+      font-size: 16px;
       width: 100%;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       text-align: center;
       font-family: var(--font-d);
       font-weight: 700;
       letter-spacing: 3px;
-      transition: border-color .2s;
+      transition: border-color .2s
     }
 
     .login-input:focus {
       outline: none;
-      border-color: var(--accent);
+      border-color: var(--accent)
     }
 
-    .login-input.text-left {
+    .login-input.text-l {
       text-align: left;
       letter-spacing: 0;
       font-family: var(--font-b);
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 500
     }
 
     .login-input.shake {
-      animation: shake .35s ease;
+      animation: shake .35s ease
     }
 
     @keyframes shake {
@@ -1023,48 +1140,48 @@
       border: none;
       border-radius: 10px;
       font-family: var(--font-d);
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 900;
       letter-spacing: 2px;
       cursor: pointer;
-      transition: opacity .18s, transform .12s;
+      transition: opacity .18s, transform .12s
     }
 
     .login-btn:hover {
-      opacity: .88;
+      opacity: .88
     }
 
     .login-btn:active {
-      transform: scale(.97);
+      transform: scale(.97)
     }
 
     .btn-a {
       background: var(--a-color);
-      color: #fff;
+      color: #fff
     }
 
     .btn-b {
       background: var(--b-color);
-      color: #fff;
+      color: #fff
     }
 
     .btn-admin {
       background: var(--accent);
-      color: #000;
+      color: #000
     }
 
     .login-error {
       color: var(--red);
       font-size: 13px;
-      margin-top: 10px;
-      min-height: 20px;
-      font-weight: 600;
+      margin-top: 9px;
+      min-height: 18px;
+      font-weight: 600
     }
 
     .login-hint {
       font-size: 12px;
       color: var(--muted);
-      margin-top: 12px;
+      margin-top: 10px
     }
 
     .admin-bar {
@@ -1073,151 +1190,152 @@
       justify-content: space-between;
       background: var(--surface2);
       border-bottom: 1px solid var(--border);
-      padding: 8px 18px;
+      padding: 7px 16px;
       font-size: 13px;
-      color: var(--muted);
+      color: var(--muted)
     }
 
     .admin-user {
       color: var(--accent);
-      font-weight: 600;
+      font-weight: 600
     }
 
     .admin-out-btn {
       background: transparent;
       border: 1px solid var(--border);
       color: var(--muted);
-      padding: 4px 12px;
+      padding: 4px 11px;
       border-radius: 6px;
       cursor: pointer;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 600
     }
 
     .admin-out-btn:hover {
       border-color: var(--red);
-      color: var(--red);
+      color: var(--red)
     }
 
-    /* ── REF PANEL ── */
+    /* REF PANEL */
     .ref-container {
-      max-width: 430px;
+      max-width: 420px;
       margin: 0 auto;
-      padding: 16px 14px 32px;
+      padding: 14px 13px 30px
     }
 
     .ref-topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
+      margin-bottom: 14px;
+      padding-bottom: 11px;
+      border-bottom: 1px solid var(--border)
     }
 
     .ref-court-name {
       font-family: var(--font-d);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 800;
       letter-spacing: 3px;
-      text-transform: uppercase;
+      text-transform: uppercase
     }
 
     .ref-status-row {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       font-family: var(--font-d);
-      font-size: 13px;
+      font-size: 12px;
       color: var(--muted);
+      margin-top: 2px
     }
 
     .sdot {
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: var(--muted);
+      background: var(--muted)
     }
 
     .sdot.live {
       background: var(--green);
       box-shadow: 0 0 8px var(--green);
-      animation: blink 1.5s infinite;
+      animation: blink 1.5s infinite
     }
 
     .sdot.paused {
-      background: var(--gold);
+      background: var(--gold)
     }
 
     .logout-btn {
       background: transparent;
       border: 1px solid var(--border);
       color: var(--muted);
-      padding: 5px 12px;
+      padding: 5px 11px;
       border-radius: 6px;
       cursor: pointer;
       font-size: 12px;
       font-weight: 600;
-      transition: all .18s;
+      transition: all .18s
     }
 
     .logout-btn:hover {
       border-color: var(--red);
-      color: var(--red);
+      color: var(--red)
     }
 
     .score-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 16px;
+      border-radius: 13px;
+      padding: 15px;
+      margin-bottom: 14px
     }
 
     .sc-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 6px;
+      margin-bottom: 5px
     }
 
     .sc-name {
       font-family: var(--font-d);
-      font-size: 19px;
-      font-weight: 800;
+      font-size: 18px;
+      font-weight: 800
     }
 
     .sc-num {
       font-family: var(--font-d);
-      font-size: 44px;
+      font-size: 42px;
       font-weight: 900;
-      line-height: 1;
+      line-height: 1
     }
 
     .sc-divider {
       height: 1px;
       background: var(--border);
-      margin: 8px 0;
+      margin: 7px 0
     }
 
     .sc-clock {
       text-align: center;
-      margin-top: 10px;
+      margin-top: 8px
     }
 
     .sc-clock-val {
       font-family: var(--font-d);
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 2px
     }
 
     .sc-clock-q {
       font-family: var(--font-d);
       font-size: 13px;
       color: var(--muted);
-      margin-left: 8px;
-      letter-spacing: 2px;
+      margin-left: 7px;
+      letter-spacing: 2px
     }
 
     .sec-label {
@@ -1226,21 +1344,21 @@
       color: var(--muted);
       text-transform: uppercase;
       font-weight: 700;
-      margin-bottom: 7px;
+      margin-bottom: 6px
     }
 
     .btn-grid {
       display: grid;
-      gap: 8px;
-      margin-bottom: 13px;
+      gap: 7px;
+      margin-bottom: 12px
     }
 
     .g3 {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, 1fr)
     }
 
     .g2 {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, 1fr)
     }
 
     .cb {
@@ -1248,125 +1366,125 @@
       border: 1px solid var(--border);
       color: var(--text);
       border-radius: 11px;
-      padding: 17px 8px;
+      padding: 16px 7px;
       font-family: var(--font-d);
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 800;
       cursor: pointer;
       transition: all .12s;
       text-align: center;
-      -webkit-tap-highlight-color: transparent;
+      -webkit-tap-highlight-color: transparent
     }
 
     .cb:active {
-      transform: scale(.95);
+      transform: scale(.95)
     }
 
     .cb.p1 {
       border-color: #4d8cff;
-      color: #4d8cff;
+      color: #4d8cff
     }
 
     .cb.p1:hover {
-      background: #4d8cff18;
+      background: #4d8cff18
     }
 
     .cb.p2 {
       border-color: #00ccff;
-      color: #00ccff;
+      color: #00ccff
     }
 
     .cb.p2:hover {
-      background: #00ccff18;
+      background: #00ccff18
     }
 
     .cb.p3 {
       border-color: var(--green);
-      color: var(--green);
+      color: var(--green)
     }
 
     .cb.p3:hover {
-      background: #00e87a18;
+      background: #00e87a18
     }
 
     .cb.m1 {
       border-color: #ff7043;
-      color: #ff7043;
+      color: #ff7043
     }
 
     .cb.m1:hover {
-      background: #ff704318;
+      background: #ff704318
     }
 
     .cb.go {
       border-color: var(--green);
-      color: var(--green);
+      color: var(--green)
     }
 
     .cb.go:hover {
-      background: #00e87a18;
+      background: #00e87a18
     }
 
     .cb.pa {
       border-color: var(--gold);
-      color: var(--gold);
+      color: var(--gold)
     }
 
     .cb.pa:hover {
-      background: #ffc84018;
+      background: #ffc84018
     }
 
     .cb.fo {
       border-color: #ff9500;
-      color: #ff9500;
+      color: #ff9500
     }
 
     .cb.fo:hover {
-      background: #ff950018;
+      background: #ff950018
     }
 
     .cb.po {
       border-color: var(--gold);
-      color: var(--gold);
+      color: var(--gold)
     }
 
     .cb.po:hover {
-      background: #ffc84018;
+      background: #ffc84018
     }
 
     .cb.nq {
       border-color: var(--muted);
-      color: var(--muted);
+      color: var(--muted)
     }
 
     .cb.nq:hover {
-      background: #ffffff0a;
+      background: #ffffff0a
     }
 
     .cb.rec {
       border-color: var(--green);
       color: var(--green);
-      font-size: 15px;
-      padding: 16px 8px;
+      font-size: 14px;
+      padding: 15px 6px
     }
 
     .cb.rec:hover {
-      background: #00e87a18;
+      background: #00e87a18
     }
 
-    /* ── ADMIN ── */
+    /* ADMIN */
     .admin-wrap {
       max-width: 720px;
       margin: 0 auto;
-      padding: 20px 16px 40px;
+      padding: 18px 14px 40px
     }
 
     .admin-title {
       font-family: var(--font-d);
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 900;
-      margin-bottom: 20px;
-      color: var(--accent);
+      margin-bottom: 18px;
+      color: var(--accent)
     }
 
     .tabs {
@@ -1375,8 +1493,8 @@
       background: var(--surface2);
       border-radius: 11px;
       padding: 4px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
+      margin-bottom: 16px;
+      flex-wrap: wrap
     }
 
     .tab {
@@ -1391,39 +1509,40 @@
       font-size: 11px;
       font-weight: 600;
       transition: all .18s;
-      min-width: 60px;
+      min-width: 55px;
+      text-align: center
     }
 
     .tab.on {
       background: var(--surface);
       color: var(--text);
-      box-shadow: 0 1px 6px rgba(0, 0, 0, .4);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, .4)
     }
 
     .tc {
-      display: none;
+      display: none
     }
 
     .tc.on {
-      display: block;
+      display: block
     }
 
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 14px;
+      border-radius: 13px;
+      padding: 15px;
+      margin-bottom: 13px
     }
 
     .card-title {
       font-family: var(--font-d);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 800;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 12px;
+      margin-bottom: 11px
     }
 
     .inp {
@@ -1435,12 +1554,12 @@
       font-family: var(--font-b);
       font-size: 14px;
       width: 100%;
-      margin-bottom: 8px;
+      margin-bottom: 8px
     }
 
     .inp:focus {
       outline: none;
-      border-color: var(--accent);
+      border-color: var(--accent)
     }
 
     .sel {
@@ -1453,7 +1572,7 @@
       font-size: 14px;
       width: 100%;
       margin-bottom: 8px;
-      appearance: none;
+      appearance: none
     }
 
     .lbl {
@@ -1461,7 +1580,7 @@
       color: var(--muted);
       margin-bottom: 3px;
       display: block;
-      letter-spacing: .5px;
+      letter-spacing: .5px
     }
 
     .ab {
@@ -1469,53 +1588,53 @@
       border: 1px solid var(--border2);
       color: var(--text);
       border-radius: 8px;
-      padding: 8px 14px;
+      padding: 8px 13px;
       cursor: pointer;
       font-family: var(--font-b);
       font-size: 13px;
       font-weight: 600;
       transition: all .18s;
-      margin: 2px;
+      margin: 2px
     }
 
     .ab:hover {
-      background: var(--border);
+      background: var(--border)
     }
 
     .ab.pri {
       border-color: var(--accent);
-      color: var(--accent);
+      color: var(--accent)
     }
 
     .ab.pri:hover {
-      background: #00d4ff14;
+      background: #00d4ff14
     }
 
     .ab.suc {
       border-color: var(--green);
-      color: var(--green);
+      color: var(--green)
     }
 
     .ab.suc:hover {
-      background: #00e87a14;
+      background: #00e87a14
     }
 
     .ab.dan {
       border-color: var(--red);
-      color: var(--red);
+      color: var(--red)
     }
 
     .ab.dan:hover {
-      background: #ff353514;
+      background: #ff353514
     }
 
     .ab.war {
       border-color: var(--gold);
-      color: var(--gold);
+      color: var(--gold)
     }
 
     .ab.war:hover {
-      background: #ffc84014;
+      background: #ffc84014
     }
 
     .row {
@@ -1523,35 +1642,35 @@
       gap: 8px;
       flex-wrap: wrap;
       align-items: flex-end;
-      margin-bottom: 8px;
+      margin-bottom: 8px
     }
 
     .field {
       flex: 1;
-      min-width: 90px;
+      min-width: 85px
     }
 
     .color-inp {
-      width: 42px;
-      height: 34px;
+      width: 40px;
+      height: 33px;
       border: 1px solid var(--border2);
       border-radius: 7px;
       cursor: pointer;
       background: none;
-      padding: 2px;
+      padding: 2px
     }
 
     .g2-admin {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 11px
     }
 
     .team-list {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      margin-top: 8px;
+      gap: 5px;
+      margin-top: 7px
     }
 
     .team-item {
@@ -1560,20 +1679,20 @@
       gap: 8px;
       background: var(--surface2);
       border-radius: 9px;
-      padding: 8px 12px;
+      padding: 8px 11px
     }
 
     .tdot {
-      width: 13px;
-      height: 13px;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
-      flex-shrink: 0;
+      flex-shrink: 0
     }
 
     .tname {
       flex: 1;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 600
     }
 
     .xbtn {
@@ -1582,11 +1701,11 @@
       color: var(--muted);
       cursor: pointer;
       font-size: 15px;
-      padding: 4px;
+      padding: 3px
     }
 
     .xbtn:hover {
-      color: var(--red);
+      color: var(--red)
     }
 
     .ta {
@@ -1600,12 +1719,12 @@
       width: 100%;
       margin-bottom: 8px;
       resize: none;
-      height: 60px;
+      height: 58px
     }
 
     .ta:focus {
       outline: none;
-      border-color: var(--accent);
+      border-color: var(--accent)
     }
 
     .sbadge {
@@ -1615,22 +1734,22 @@
       padding: 4px 9px;
       font-size: 12px;
       color: var(--muted);
-      margin: 2px;
+      margin: 2px
     }
 
     .pw-info {
       background: rgba(0, 212, 255, .06);
       border: 1px solid rgba(0, 212, 255, .15);
       border-radius: 10px;
-      padding: 13px;
+      padding: 12px;
       font-size: 13px;
       color: var(--muted);
       line-height: 1.7;
-      margin-top: 10px;
+      margin-top: 10px
     }
 
     .pw-info strong {
-      color: var(--accent);
+      color: var(--accent)
     }
 
     .rec-score-row {
@@ -1638,15 +1757,15 @@
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 11px
     }
 
     .rec-vs {
       font-family: var(--font-d);
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 900;
       color: var(--muted);
-      text-align: center;
+      text-align: center
     }
 
     .rec-score-inp {
@@ -1654,20 +1773,58 @@
       border: 1px solid var(--border2);
       color: var(--text);
       border-radius: 8px;
-      padding: 10px;
+      padding: 9px;
       font-family: var(--font-d);
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 900;
       text-align: center;
-      width: 100%;
+      width: 100%
     }
 
     .rec-score-inp:focus {
       outline: none;
-      border-color: var(--accent);
+      border-color: var(--accent)
     }
 
-    /* ── FIREBASE CONFIG ── */
+    /* Admin grade tabs for leaderboard management */
+    .grade-admin-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 14px;
+      flex-wrap: wrap
+    }
+
+    .grade-admin-tab {
+      background: transparent;
+      border: 1px solid var(--border2);
+      color: var(--muted);
+      padding: 6px 12px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-family: var(--font-d);
+      font-size: 14px;
+      font-weight: 800;
+      transition: all .18s
+    }
+
+    .grade-admin-tab.on {
+      background: var(--surface2);
+      border-color: var(--accent);
+      color: var(--accent)
+    }
+
+    /* Preview list in admin */
+    .preview-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--surface2);
+      border-radius: 8px;
+      padding: 8px 11px;
+      margin-bottom: 5px
+    }
+
+    /* FIREBASE CFG */
     #cfg-banner {
       position: fixed;
       inset: 0;
@@ -1676,31 +1833,31 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 20px
     }
 
     .cfg-box {
       background: var(--surface);
       border: 1px solid var(--border2);
       border-radius: 20px;
-      padding: 32px;
-      max-width: 540px;
-      width: 100%;
+      padding: 30px;
+      max-width: 530px;
+      width: 100%
     }
 
     .cfg-title {
       font-family: var(--font-d);
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 900;
       color: var(--accent);
-      margin-bottom: 8px;
+      margin-bottom: 7px
     }
 
     .cfg-sub {
       font-size: 13px;
       color: var(--muted);
-      margin-bottom: 20px;
-      line-height: 1.6;
+      margin-bottom: 18px;
+      line-height: 1.6
     }
 
     .cfg-inp {
@@ -1708,16 +1865,16 @@
       border: 1px solid var(--border2);
       color: var(--text);
       border-radius: 9px;
-      padding: 10px 13px;
+      padding: 9px 12px;
       font-family: var(--font-b);
       font-size: 13px;
       width: 100%;
-      margin-bottom: 9px;
+      margin-bottom: 8px
     }
 
     .cfg-inp:focus {
       outline: none;
-      border-color: var(--accent);
+      border-color: var(--accent)
     }
 
     .cfg-btn {
@@ -1727,18 +1884,18 @@
       border-radius: 9px;
       padding: 12px;
       font-family: var(--font-d);
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 900;
       cursor: pointer;
       width: 100%;
       margin-top: 4px;
-      letter-spacing: 1px;
+      letter-spacing: 1px
     }
 
     .cfg-step {
       font-size: 12px;
       color: var(--muted);
-      margin-bottom: 5px;
+      margin-bottom: 5px
     }
 
     .cfg-code {
@@ -1749,52 +1906,52 @@
       color: var(--accent);
       font-family: monospace;
       margin-bottom: 8px;
-      word-break: break-all;
+      word-break: break-all
     }
 
     .cfg-err {
       color: var(--red);
       font-size: 13px;
       margin-top: 8px;
-      min-height: 18px;
+      min-height: 17px
     }
 
-    /* ── TOAST ── */
+    /* TOAST */
     #toast {
       position: fixed;
-      bottom: 20px;
+      bottom: 18px;
       left: 50%;
-      transform: translateX(-50%) translateY(16px);
+      transform: translateX(-50%) translateY(14px);
       background: var(--surface);
       border: 1px solid var(--border2);
       border-radius: 12px;
-      padding: 11px 20px;
+      padding: 10px 18px;
       font-size: 14px;
       font-weight: 600;
       z-index: 9999;
       opacity: 0;
       pointer-events: none;
       transition: opacity .22s, transform .22s;
-      white-space: nowrap;
+      white-space: nowrap
     }
 
     #toast.show {
       opacity: 1;
-      transform: translateX(-50%) translateY(0);
+      transform: translateX(-50%) translateY(0)
     }
   </style>
 </head>
 
 <body>
 
-  <!-- FIREBASE CONFIG -->
+  <!-- FIREBASE CONFIG OVERLAY -->
   <div id="cfg-banner">
     <div class="cfg-box">
       <div class="cfg-title">🔥 Firebase Setup</div>
-      <div class="cfg-sub">Connect your Firebase Realtime Database for real-time cross-device sync. Only required once —
-        saved in your browser.</div>
+      <div class="cfg-sub">Connect your Firebase Realtime Database for real-time sync across all devices. Only needed
+        once — saved in your browser.</div>
       <div class="cfg-step">1. Go to <strong>console.firebase.google.com</strong> → Project Settings → Web app</div>
-      <div class="cfg-step" style="margin-top:6px">2. Set Realtime Database rules:</div>
+      <div class="cfg-step" style="margin-top:5px">2. Set Database rules to allow read/write:</div>
       <div class="cfg-code">{ "rules": { ".read": true, ".write": true } }</div>
       <label class="cfg-step">Database URL</label>
       <input class="cfg-inp" id="cfg-db-url" placeholder="https://your-project-default-rtdb.firebaseio.com">
@@ -1808,13 +1965,13 @@
   </div>
 
   <!-- TEAM STATS MODAL -->
-  <div class="modal-bg" id="stats-modal" onclick="closeModal(event)">
+  <div class="modal-bg" id="stats-modal" onclick="closeModalBg(event)">
     <div class="modal" id="stats-modal-inner">
       <div class="modal-header">
         <div class="modal-blob" id="modal-blob"></div>
         <div>
           <div class="modal-team-name" id="modal-team-name">—</div>
-          <div style="font-size:12px;color:var(--muted)" id="modal-team-sub">—</div>
+          <div class="modal-grade-tag" id="modal-grade-tag">—</div>
         </div>
         <button class="modal-close" onclick="closeStatsModal()">✕</button>
       </div>
@@ -1829,7 +1986,7 @@
   <!-- MAIN APP -->
   <div id="app" style="display:none">
     <nav id="nav">
-      <div class="logo">Annual Osrah Basketball Competition</div>
+      <div class="logo">Hoop<em>Board</em></div>
       <div class="live-pill offline" id="live-pill">
         <div class="live-dot"></div><span id="live-txt">CONNECTING</span>
       </div>
@@ -1843,7 +2000,7 @@
       </div>
     </nav>
 
-    <!-- DISPLAY -->
+    <!-- ── DISPLAY PAGE ── -->
     <div class="page active" id="page-display">
       <div class="display-wrap">
         <div class="courts-row">
@@ -1908,44 +2065,39 @@
         </div>
         <div class="banner">
           <div class="banner-tag">Live</div>
-          <div class="banner-msg" id="banner-msg">Welcome to Annual Osrah Basketball Competition</div>
-          <div class="banner-sponsor" id="banner-sponsor">Powered by Annual Osrah Basketball Competition</div>
+          <div class="banner-msg" id="banner-msg">Welcome to HoopBoard Pro</div>
+          <div class="banner-sponsor" id="banner-sponsor">Powered by HoopBoard</div>
         </div>
       </div>
     </div>
 
-    <!-- LEADERBOARD -->
+    <!-- ── LEADERBOARD PAGE ── -->
     <div class="page" id="page-leaderboard">
-      <div class="lb-wrap">
-        <div class="lb-header">
-          <div>
-            <div class="lb-title">🏆 <span>Standings</span></div>
-            <div class="lb-subtitle">Tap any team row to view full stats & game log</div>
-          </div>
-          <div class="lb-season" id="lb-season-label">Season 2024–25</div>
+      <div class="lb-page-wrap">
+        <div class="lb-page-header">
+          <div class="lb-page-title">🏆 <span>Grade Standings</span></div>
+          <div style="font-size:13px;color:var(--muted);margin-top:3px">Select a grade to view standings — tap any team
+            for full stats</div>
         </div>
-        <div class="lb-table-wrap">
-          <div class="lb-thead">
-            <div class="lb-th">#</div>
-            <div class="lb-th">Team</div>
-            <div class="lb-th">W</div>
-            <div class="lb-th">L</div>
-            <div class="lb-th">GP</div>
-            <div class="lb-th">DIFF</div>
-            <div class="lb-th">WIN%</div>
-          </div>
-          <div id="lb-body"></div>
+        <div class="grade-tabs">
+          <button class="grade-tab g6 on" onclick="switchGrade('g6',this)">Grade 6</button>
+          <button class="grade-tab g7" onclick="switchGrade('g7',this)">Grade 7</button>
+          <button class="grade-tab g8" onclick="switchGrade('g8',this)">Grade 8</button>
+          <button class="grade-tab g9" onclick="switchGrade('g9',this)">Grade 9</button>
+          <button class="grade-tab g10" onclick="switchGrade('g10',this)">Grade 10</button>
         </div>
+        <!-- Grade panels injected by JS -->
+        <div id="grade-panels"></div>
       </div>
     </div>
 
-    <!-- REF A -->
+    <!-- ── REF A ── -->
     <div class="page" id="page-ref-a">
       <div class="login-screen" id="lg-a">
         <div class="login-box">
           <span class="login-emoji">🏀</span>
           <div class="login-title" style="color:var(--a-color)">Referee A</div>
-          <div class="login-sub">Court A control panel<br>Enter your password to continue</div>
+          <div class="login-sub">Court A — Enter your password</div>
           <input type="password" class="login-input" id="li-a" placeholder="••••••"
             onkeydown="if(event.key==='Enter')doLogin('a')">
           <button class="login-btn btn-a" onclick="doLogin('a')">ENTER COURT A</button>
@@ -1994,20 +2146,20 @@
           <div class="btn-grid g3"><button class="cb fo" onclick="addFoul('a',1)">Foul T1</button><button class="cb fo"
               onclick="addFoul('a',2)">Foul T2</button><button class="cb nq" onclick="nextQ('a')">Next Q ▶</button>
           </div>
-          <div class="sec-label" style="margin-top:4px">Save to Leaderboard</div>
+          <div class="sec-label" style="margin-top:4px">Save to Standings</div>
           <div class="btn-grid" style="grid-template-columns:1fr"><button class="cb rec"
               onclick="recordResultFromCourt('a')">✅ Record Final Result</button></div>
         </div>
       </div>
     </div>
 
-    <!-- REF B -->
+    <!-- ── REF B ── -->
     <div class="page" id="page-ref-b">
       <div class="login-screen" id="lg-b">
         <div class="login-box">
           <span class="login-emoji">🏀</span>
           <div class="login-title" style="color:var(--b-color)">Referee B</div>
-          <div class="login-sub">Court B control panel<br>Enter your password to continue</div>
+          <div class="login-sub">Court B — Enter your password</div>
           <input type="password" class="login-input" id="li-b" placeholder="••••••"
             onkeydown="if(event.key==='Enter')doLogin('b')">
           <button class="login-btn btn-b" onclick="doLogin('b')">ENTER COURT B</button>
@@ -2056,22 +2208,22 @@
           <div class="btn-grid g3"><button class="cb fo" onclick="addFoul('b',1)">Foul T3</button><button class="cb fo"
               onclick="addFoul('b',2)">Foul T4</button><button class="cb nq" onclick="nextQ('b')">Next Q ▶</button>
           </div>
-          <div class="sec-label" style="margin-top:4px">Save to Leaderboard</div>
+          <div class="sec-label" style="margin-top:4px">Save to Standings</div>
           <div class="btn-grid" style="grid-template-columns:1fr"><button class="cb rec"
               onclick="recordResultFromCourt('b')">✅ Record Final Result</button></div>
         </div>
       </div>
     </div>
 
-    <!-- ADMIN -->
+    <!-- ── ADMIN PAGE ── -->
     <div class="page" id="page-admin">
-      <!-- Login Gate -->
+      <!-- Admin Login Gate -->
       <div class="login-screen" id="admin-login-gate">
         <div class="login-box">
           <span class="login-emoji">🔐</span>
           <div class="login-title" style="color:var(--accent)">Admin Access</div>
           <div class="login-sub">Authorised personnel only</div>
-          <input type="email" class="login-input text-left" id="admin-email-inp" placeholder="Email address"
+          <input type="email" class="login-input text-l" id="admin-email-inp" placeholder="Email address"
             onkeydown="if(event.key==='Enter')doAdminLogin()">
           <input type="password" class="login-input" id="admin-pw-inp" placeholder="••••••••"
             onkeydown="if(event.key==='Enter')doAdminLogin()">
@@ -2079,7 +2231,7 @@
           <div class="login-error" id="admin-login-err"></div>
         </div>
       </div>
-      <!-- Panel -->
+      <!-- Admin Panel -->
       <div id="admin-panel" style="display:none">
         <div class="admin-bar">
           <span>Signed in as <span class="admin-user" id="admin-user-display">—</span></span>
@@ -2089,14 +2241,14 @@
           <div class="admin-title">⚙️ Admin Panel</div>
           <div class="tabs">
             <button class="tab on" onclick="aTab('games',this)">Games</button>
-            <button class="tab" onclick="aTab('leaderboard',this)">🏆 Leaderboard</button>
+            <button class="tab" onclick="aTab('leaderboard',this)">🏆 Standings</button>
             <button class="tab" onclick="aTab('teams',this)">Teams</button>
-            <button class="tab" onclick="aTab('passwords',this)">🔐 Passwords</button>
+            <button class="tab" onclick="aTab('passwords',this)">🔐 PW</button>
             <button class="tab" onclick="aTab('broadcast',this)">Broadcast</button>
             <button class="tab" onclick="aTab('system',this)">System</button>
           </div>
 
-          <!-- GAMES -->
+          <!-- GAMES TAB -->
           <div class="tc on" id="tc-games">
             <div class="g2-admin">
               <div class="card">
@@ -2116,11 +2268,11 @@
                 <label class="lbl">Override T2</label>
                 <div class="row"><input type="number" class="inp" id="ov-a-s2" min="0" style="margin-bottom:0"><button
                     class="ab war" onclick="ovScore('a',2)">Set</button></div>
-                <label class="lbl">Set Clock (mm:ss)</label>
+                <label class="lbl">Set Clock</label>
                 <div class="row"><input type="text" class="inp" id="ov-a-clk" placeholder="10:00"
                     style="margin-bottom:0"><button class="ab war" onclick="ovClock('a')">Set</button></div>
-                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
-                  <button class="ab pri" onclick="startGame('a')">Start Game</button>
+                <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:8px">
+                  <button class="ab pri" onclick="startGame('a')">Start</button>
                   <button class="ab dan" onclick="resetGame('a')">Reset</button>
                   <button class="ab" onclick="swapTeams('a')">Swap</button>
                 </div>
@@ -2142,11 +2294,11 @@
                 <label class="lbl">Override T2</label>
                 <div class="row"><input type="number" class="inp" id="ov-b-s2" min="0" style="margin-bottom:0"><button
                     class="ab war" onclick="ovScore('b',2)">Set</button></div>
-                <label class="lbl">Set Clock (mm:ss)</label>
+                <label class="lbl">Set Clock</label>
                 <div class="row"><input type="text" class="inp" id="ov-b-clk" placeholder="10:00"
                     style="margin-bottom:0"><button class="ab war" onclick="ovClock('b')">Set</button></div>
-                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
-                  <button class="ab pri" onclick="startGame('b')">Start Game</button>
+                <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:8px">
+                  <button class="ab pri" onclick="startGame('b')">Start</button>
                   <button class="ab dan" onclick="resetGame('b')">Reset</button>
                   <button class="ab" onclick="swapTeams('b')">Swap</button>
                 </div>
@@ -2154,12 +2306,20 @@
             </div>
           </div>
 
-          <!-- LEADERBOARD ADMIN -->
+          <!-- LEADERBOARD ADMIN TAB -->
           <div class="tc" id="tc-leaderboard">
             <div class="card">
               <div class="card-title">📋 Record Game Result</div>
-              <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.6">Manually record a
-                completed game. Updates both teams' W/L and point differential instantly.</p>
+              <p style="font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.6">Select the grade, teams,
+                and final score. Updates both teams' record instantly.</p>
+              <label class="lbl">Grade</label>
+              <select class="sel" id="rec-grade">
+                <option value="g6">Grade 6</option>
+                <option value="g7">Grade 7</option>
+                <option value="g8">Grade 8</option>
+                <option value="g9">Grade 9</option>
+                <option value="g10">Grade 10</option>
+              </select>
               <label class="lbl">Team 1</label><select class="sel" id="rec-t1"></select>
               <label class="lbl">Team 2</label><select class="sel" id="rec-t2"></select>
               <label class="lbl">Final Score</label>
@@ -2171,26 +2331,30 @@
               <button class="ab suc" onclick="recordResult()">✅ Record Result</button>
             </div>
             <div class="card">
-              <div class="card-title">Current Standings Preview</div>
+              <div class="card-title">Standings Preview</div>
+              <div class="grade-admin-tabs" id="admin-lb-grade-tabs"></div>
               <div id="admin-lb-preview"></div>
-              <div style="margin-top:12px"><button class="ab dan" onclick="clearLeaderboard()">⚠️ Clear All
-                  Results</button></div>
-            </div>
-            <div class="card">
-              <div class="card-title">Season Label</div>
-              <div class="row">
-                <div class="field"><input type="text" class="inp" id="season-label-inp" placeholder="Season 2024–25"
-                    style="margin-bottom:0"></div><button class="ab pri" onclick="saveSeasonLabel()">Save</button>
+              <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
+                <button class="ab dan" onclick="clearGradeLeaderboard()">⚠️ Clear This Grade</button>
+                <button class="ab dan" onclick="clearAllLeaderboards()">⚠️ Clear ALL Grades</button>
               </div>
             </div>
           </div>
 
-          <!-- TEAMS -->
+          <!-- TEAMS TAB -->
           <div class="tc" id="tc-teams">
             <div class="card">
-              <div class="card-title">Add Team</div>
+              <div class="card-title">Add Team to Grade</div>
+              <label class="lbl">Grade</label>
+              <select class="sel" id="nt-grade">
+                <option value="g6">Grade 6</option>
+                <option value="g7">Grade 7</option>
+                <option value="g8">Grade 8</option>
+                <option value="g9">Grade 9</option>
+                <option value="g10">Grade 10</option>
+              </select>
               <div class="row">
-                <div class="field"><label class="lbl">Name</label><input type="text" class="inp" id="nt-name"
+                <div class="field"><label class="lbl">Team Name</label><input type="text" class="inp" id="nt-name"
                     placeholder="e.g. Lakers" style="margin-bottom:0"></div>
                 <div><label class="lbl">Color</label><input type="color" class="color-inp" id="nt-c1" value="#ff4444">
                 </div>
@@ -2200,17 +2364,15 @@
               <button class="ab suc" onclick="addTeam()">+ Add Team</button>
             </div>
             <div class="card">
-              <div class="card-title">All Teams</div>
-              <div class="team-list" id="team-list"></div>
+              <div class="card-title">All Teams by Grade</div>
+              <div id="team-list"></div>
             </div>
           </div>
 
-          <!-- PASSWORDS -->
+          <!-- PASSWORDS TAB -->
           <div class="tc" id="tc-passwords">
             <div class="card">
               <div class="card-title">🔐 Referee Passwords</div>
-              <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.6">Set the password each
-                referee uses to unlock their panel on their phone.</p>
               <label class="lbl">Ref A Password (Court A)</label>
               <div class="row">
                 <div class="field"><input type="text" class="inp" id="pw-a" placeholder="e.g. CourtA2024"
@@ -2223,17 +2385,17 @@
                     style="margin-bottom:0;letter-spacing:2px;font-weight:700"></div><button class="ab pri"
                   onclick="savePW('b')">Save</button>
               </div>
-              <div class="pw-info" style="margin-top:14px">
-                <strong>How it works:</strong><br>
-                📱 Ref A opens the URL on their phone → taps "Ref A" → enters password<br>
-                📱 Ref B opens the URL on their phone → taps "Ref B" → enters password<br>
-                📺 Display screen → press ⛶ fullscreen → show on projector or TV<br>
-                🏆 Standings auto-update when refs press "Record Final Result"
+              <div class="pw-info" style="margin-top:12px">
+                <strong>Workflow:</strong><br>
+                📱 Ref A → phone → "Ref A" tab → enter password → control Court A<br>
+                📱 Ref B → phone → "Ref B" tab → enter password → control Court B<br>
+                📺 Display → press ⛶ fullscreen → project on big screen/TV<br>
+                🏆 Refs press "Record Final Result" → standings auto-update per grade
               </div>
             </div>
           </div>
 
-          <!-- BROADCAST -->
+          <!-- BROADCAST TAB -->
           <div class="tc" id="tc-broadcast">
             <div class="card">
               <div class="card-title">Announcement Banner</div>
@@ -2242,13 +2404,13 @@
               <label class="lbl">Sponsor text</label>
               <input type="text" class="inp" id="ann-sponsor" placeholder="Powered by HoopBoard">
               <div style="display:flex;gap:6px;flex-wrap:wrap">
-                <button class="ab pri" onclick="sendAnn()">Send to Banner</button>
+                <button class="ab pri" onclick="sendAnn()">Send</button>
                 <button class="ab" onclick="clearAnn()">Clear</button>
               </div>
             </div>
             <div class="card">
               <div class="card-title">Manual Animations</div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <div style="display:flex;gap:7px;flex-wrap:wrap">
                 <button class="ab war" onclick="trigAnim('a','pop')">Flash A</button>
                 <button class="ab war" onclick="trigAnim('b','pop')">Flash B</button>
                 <button class="ab suc" onclick="trigAnim('a','three')">3-Ptr A 🔥</button>
@@ -2259,23 +2421,23 @@
             </div>
           </div>
 
-          <!-- SYSTEM -->
+          <!-- SYSTEM TAB -->
           <div class="tc" id="tc-system">
             <div class="card">
               <div class="card-title">System</div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+              <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px">
                 <button class="ab dan" onclick="fullReset()">⚠️ Full Reset</button>
                 <button class="ab" onclick="exportJSON()">Export JSON</button>
                 <button class="ab" onclick="reconfigFirebase()">Re-configure Firebase</button>
               </div>
               <div>
-                <div class="sbadge">HoopBoard Pro v3.0</div>
+                <div class="sbadge">HoopBoard Pro v3.1</div>
                 <div class="sbadge" id="fb-status-badge">Firebase: Connecting…</div>
+                <div class="sbadge">5 Grade Leaderboards</div>
                 <div class="sbadge">Real-time sync</div>
               </div>
-              <p style="margin-top:12px;font-size:12px;color:var(--muted);line-height:1.7">Deploy
-                <code>index.html</code> to Vercel. All devices connect to the same Firebase database. Admin:
-                <strong>alghoujk@gmail.com</strong>
+              <p style="margin-top:11px;font-size:12px;color:var(--muted);line-height:1.7">Admin login:
+                <strong>alghoujk@gmail.com</strong> / admin12345 — Deploy <code>index.html</code> to Vercel.
               </p>
             </div>
           </div>
@@ -2290,46 +2452,65 @@
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
     import { getDatabase, ref, set, onValue, get } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 
-    // ══════════ CONSTANTS ══════════
+    // ═══════════════════════════════
+    //  CONSTANTS
+    // ═══════════════════════════════
     const ADMIN_EMAIL = 'alghoujk@gmail.com';
     const ADMIN_PASSWORD = 'admin12345';
+    const GRADES = ['g6', 'g7', 'g8', 'g9', 'g10'];
+    const GRADE_LABELS = { g6: 'Grade 6', g7: 'Grade 7', g8: 'Grade 8', g9: 'Grade 9', g10: 'Grade 10' };
+    const GRADE_COLORS = { g6: '#ff6b6b', g7: '#ffa94d', g8: '#ffd43b', g9: '#69db7c', g10: '#74c0fc' };
 
-    const DEFAULT_TEAMS = [
-      { id: 't1', name: 'Bulls', c1: '#cc0000', c2: '#fff' },
-      { id: 't2', name: 'Lakers', c1: '#552583', c2: '#FDB927' },
-      { id: 't3', name: 'Warriors', c1: '#1D428A', c2: '#FFC72C' },
-      { id: 't4', name: 'Celtics', c1: '#007A33', c2: '#fff' },
-      { id: 't5', name: 'Heat', c1: '#98002E', c2: '#F9A01B' },
-      { id: 't6', name: 'Nets', c1: '#555555', c2: '#fff' },
-    ];
-    const mkCourt = (t1, t2) => ({ t1, t2, s1: 0, s2: 0, f1: 0, f2: 0, q: 1, qDur: 10, secs: 600, running: false, poss: 0, mom: 50, history: [] });
-    const DEFAULT_STATE = {
-      teams: DEFAULT_TEAMS,
-      courts: { a: mkCourt('t1', 't2'), b: mkCourt('t3', 't4') },
-      banner: 'Welcome to HoopBoard Pro — Real-Time Basketball Scoreboard',
-      sponsor: 'Powered by HoopBoard',
-      passwords: { a: 'refa', b: 'refb' },
-      leaderboard: {},
-      results: [],
-      seasonLabel: 'Season 2024–25',
-    };
+    // Default 6 teams per grade
+    function defaultTeamsForGrade(g) {
+      const sets = {
+        g6: [{ id: g + '_t1', name: 'Falcons', c1: '#e63946', c2: '#fff' }, { id: g + '_t2', name: 'Lions', c1: '#f4a261', c2: '#fff' }, { id: g + '_t3', name: 'Eagles', c1: '#2a9d8f', c2: '#fff' }, { id: g + '_t4', name: 'Wolves', c1: '#457b9d', c2: '#fff' }, { id: g + '_t5', name: 'Bears', c1: '#6a4c93', c2: '#fff' }, { id: g + '_t6', name: 'Tigers', c1: '#f72585', c2: '#fff' }],
+        g7: [{ id: g + '_t1', name: 'Hawks', c1: '#cc0000', c2: '#fff' }, { id: g + '_t2', name: 'Storm', c1: '#003566', c2: '#ffd60a' }, { id: g + '_t3', name: 'Vipers', c1: '#007200', c2: '#fff' }, { id: g + '_t4', name: 'Sharks', c1: '#023e8a', c2: '#fff' }, { id: g + '_t5', name: 'Cobras', c1: '#6d2b00', c2: '#fff' }, { id: g + '_t6', name: 'Phoenix', c1: '#9d0208', c2: '#ffb703' }],
+        g8: [{ id: g + '_t1', name: 'Bulls', c1: '#cc0000', c2: '#fff' }, { id: g + '_t2', name: 'Lakers', c1: '#552583', c2: '#FDB927' }, { id: g + '_t3', name: 'Celtics', c1: '#007A33', c2: '#fff' }, { id: g + '_t4', name: 'Heat', c1: '#98002E', c2: '#F9A01B' }, { id: g + '_t5', name: 'Suns', c1: '#1D1160', c2: '#E56020' }, { id: g + '_t6', name: 'Nets', c1: '#555', c2: '#fff' }],
+        g9: [{ id: g + '_t1', name: 'Warriors', c1: '#1D428A', c2: '#FFC72C' }, { id: g + '_t2', name: 'Raptors', c1: '#CE1141', c2: '#fff' }, { id: g + '_t3', name: 'Mavs', c1: '#0053BC', c2: '#00285E' }, { id: g + '_t4', name: 'Nuggets', c1: '#0E2240', c2: '#FEC524' }, { id: g + '_t5', name: 'Clippers', c1: '#C8102E', c2: '#1D428A' }, { id: g + '_t6', name: 'Pacers', c1: '#002D62', c2: '#FDBB30' }],
+        g10: [{ id: g + '_t1', name: 'Thunder', c1: '#007AC1', c2: '#EF3B24' }, { id: g + '_t2', name: 'Bucks', c1: '#00471B', c2: '#EEE1C6' }, { id: g + '_t3', name: 'Cavs', c1: '#860038', c2: '#FDBB30' }, { id: g + '_t4', name: 'Grizzlies', c1: '#5D76A9', c2: '#12173F' }, { id: g + '_t5', name: 'Pelicans', c1: '#0C2340', c2: '#C8102E' }, { id: g + '_t6', name: 'Magic', c1: '#0077C0', c2: '#000' }],
+      };
+      return sets[g] || sets.g6.map((t, i) => ({ ...t, id: g + '_t' + (i + 1) }));
+    }
 
-    // ══════════ STATE ══════════
-    let S = JSON.parse(JSON.stringify(DEFAULT_STATE));
+    function mkCourt(t1, t2) { return { t1, t2, s1: 0, s2: 0, f1: 0, f2: 0, q: 1, qDur: 10, secs: 600, running: false, poss: 0, mom: 50, history: [] }; }
+    function defaultLB(teams) { const o = {}; teams.forEach(t => { o[t.id] = { w: 0, l: 0, pf: 0, pa: 0, games: [] }; }); return o; }
+
+    function buildDefaultState() {
+      const gradeTeams = {}; const gradeLB = {};
+      GRADES.forEach(g => { gradeTeams[g] = defaultTeamsForGrade(g); gradeLB[g] = defaultLB(gradeTeams[g]); });
+      const aTeams = gradeTeams.g6; const bTeams = gradeTeams.g7;
+      return {
+        gradeTeams, gradeLB,
+        courts: { a: mkCourt(aTeams[0].id, aTeams[1].id), b: mkCourt(bTeams[0].id, bTeams[1].id) },
+        banner: 'Welcome to HoopBoard Pro — Real-Time Basketball Scoreboard',
+        sponsor: 'Powered by HoopBoard',
+        passwords: { a: 'refa', b: 'refb' },
+        activeCourts: { a: 'g6', b: 'g7' },// which grade each court is playing
+      };
+    }
+
+    // ═══════════════════════════════
+    //  STATE
+    // ═══════════════════════════════
+    let S = buildDefaultState();
     let db = null, dbRef = null;
     let timers = { a: null, b: null };
     let loggedIn = { a: false, b: false };
     let adminIn = false;
     let ignoreNext = false;
+    let currentGrade = 'g6';        // leaderboard view
+    let adminLBGrade = 'g6';        // admin preview grade
 
-    // ══════════ FIREBASE ══════════
+    // ═══════════════════════════════
+    //  FIREBASE
+    // ═══════════════════════════════
     function loadFBCfg() { try { return JSON.parse(localStorage.getItem('hb_fb_cfg') || 'null'); } catch { return null; } }
     window.saveFirebaseConfig = function () {
       const url = g('cfg-db-url').value.trim(), key = g('cfg-api-key').value.trim(), pid = g('cfg-project-id').value.trim();
-      if (!url || !key || !pid) { g('cfg-err').textContent = 'Fill in all fields.'; return; }
+      if (!url || !key || !pid) { g('cfg-err').textContent = 'Fill in all three fields.'; return; }
       const cfg = { databaseURL: url, apiKey: key, projectId: pid, appId: 'hoopboard' };
-      localStorage.setItem('hb_fb_cfg', JSON.stringify(cfg));
-      g('cfg-err').textContent = ''; launchApp(cfg);
+      localStorage.setItem('hb_fb_cfg', JSON.stringify(cfg)); g('cfg-err').textContent = ''; launchApp(cfg);
     };
     window.reconfigFirebase = function () { localStorage.removeItem('hb_fb_cfg'); location.reload(); };
 
@@ -2340,7 +2521,7 @@
         onValue(dbRef, snap => {
           if (ignoreNext) { ignoreNext = false; return; }
           const r = snap.val(); if (!r) return;
-          S = r; if (!S.leaderboard) S.leaderboard = {}; if (!S.results) S.results = [];
+          S = r; ensureState();
           ['a', 'b'].forEach(c => {
             if (S.courts[c].running && !timers[c]) startLocalTimer(c);
             if (!S.courts[c].running && timers[c]) { clearInterval(timers[c]); timers[c] = null; }
@@ -2349,98 +2530,146 @@
         }, err => { setLive(false); g('fb-status-badge').textContent = 'Firebase: ❌ ' + err.message; });
         get(dbRef).then(snap => {
           if (!snap.exists()) pushState();
-          else { S = snap.val(); if (!S.leaderboard) S.leaderboard = {}; if (!S.results) S.results = []; renderAll(); }
+          else { S = snap.val(); ensureState(); renderAll(); }
         });
       } catch (e) { setLive(false); toast('Firebase error: ' + e.message); }
     }
     function pushState() { if (!db) return; ignoreNext = true; set(dbRef, S).catch(e => { setLive(false); console.error(e); }); }
 
-    // ══════════ ADMIN LOGIN ══════════
+    function ensureState() {
+      if (!S.gradeTeams) S.gradeTeams = {};
+      if (!S.gradeLB) S.gradeLB = {};
+      if (!S.activeCourts) S.activeCourts = { a: 'g6', b: 'g7' };
+      GRADES.forEach(g => {
+        if (!S.gradeTeams[g]) S.gradeTeams[g] = defaultTeamsForGrade(g);
+        if (!S.gradeLB[g]) S.gradeLB[g] = defaultLB(S.gradeTeams[g]);
+        S.gradeTeams[g].forEach(t => { if (!S.gradeLB[g][t.id]) S.gradeLB[g][t.id] = { w: 0, l: 0, pf: 0, pa: 0, games: [] }; });
+      });
+    }
+
+    // ═══════════════════════════════
+    //  ADMIN LOGIN
+    // ═══════════════════════════════
     window.doAdminLogin = function () {
-      const email = g('admin-email-inp').value.trim().toLowerCase();
-      const pw = g('admin-pw-inp').value;
+      const email = g('admin-email-inp').value.trim().toLowerCase(), pw = g('admin-pw-inp').value;
       if (email === ADMIN_EMAIL && pw === ADMIN_PASSWORD) {
-        adminIn = true;
-        g('admin-login-gate').style.display = 'none'; g('admin-panel').style.display = 'block';
-        g('admin-user-display').textContent = ADMIN_EMAIL;
-        g('admin-email-inp').value = ''; g('admin-pw-inp').value = ''; g('admin-login-err').textContent = '';
+        adminIn = true; g('admin-login-gate').style.display = 'none'; g('admin-panel').style.display = 'block';
+        g('admin-user-display').textContent = ADMIN_EMAIL; g('admin-email-inp').value = ''; g('admin-pw-inp').value = ''; g('admin-login-err').textContent = '';
         renderAll(); toast('✅ Admin signed in');
       } else {
         [g('admin-email-inp'), g('admin-pw-inp')].forEach(el => { el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); });
         g('admin-login-err').textContent = '❌ Invalid email or password'; g('admin-pw-inp').value = '';
       }
     };
-    window.doAdminLogout = function () {
-      adminIn = false; g('admin-login-gate').style.display = 'flex'; g('admin-panel').style.display = 'none'; toast('Admin signed out');
-    };
+    window.doAdminLogout = function () { adminIn = false; g('admin-login-gate').style.display = 'flex'; g('admin-panel').style.display = 'none'; toast('Admin signed out'); };
 
-    // ══════════ REF LOGIN ══════════
+    // ═══════════════════════════════
+    //  REF LOGIN
+    // ═══════════════════════════════
     window.doLogin = function (c) {
       const pw = g('li-' + c).value, ok = (S.passwords && S.passwords[c]) || (c === 'a' ? 'refa' : 'refb');
       if (pw === ok) { loggedIn[c] = true; g('lg-' + c).style.display = 'none'; g('rp-' + c).style.display = 'block'; g('li-' + c).value = ''; g('le-' + c).textContent = ''; renderRefPanel(c); toast(`✅ Referee ${c.toUpperCase()} logged in`); }
-      else { const inp = g('li-' + c); inp.value = ''; inp.classList.remove('shake'); void inp.offsetWidth; inp.classList.add('shake'); g('le-' + c).textContent = '❌ Wrong password'; }
+      else { const el = g('li-' + c); el.value = ''; el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake'); g('le-' + c).textContent = '❌ Wrong password'; }
     };
     window.doLogout = function (c) { loggedIn[c] = false; g('lg-' + c).style.display = 'flex'; g('rp-' + c).style.display = 'none'; toast(`Referee ${c.toUpperCase()} logged out`); };
-    window.savePW = function (c) { const pw = g('pw-' + c).value.trim(); if (!pw) { toast('Password cannot be empty'); return; } if (!S.passwords) S.passwords = {}; S.passwords[c] = pw; pushState(); g('pw-' + c).value = ''; toast(`✅ Ref ${c.toUpperCase()} password saved`); };
+    window.savePW = function (c) { const pw = g('pw-' + c).value.trim(); if (!pw) { toast('Cannot be empty'); return; } if (!S.passwords) S.passwords = {}; S.passwords[c] = pw; pushState(); g('pw-' + c).value = ''; toast(`✅ Ref ${c.toUpperCase()} password saved`); };
 
-    // ══════════ LEADERBOARD ══════════
-    function initLB() {
-      if (!S.leaderboard) S.leaderboard = {};
-      S.teams.forEach(t => { if (!S.leaderboard[t.id]) S.leaderboard[t.id] = { w: 0, l: 0, pf: 0, pa: 0, games: [] }; });
+    // ═══════════════════════════════
+    //  GRADE & TEAM HELPERS
+    // ═══════════════════════════════
+    function getTeam(teamId) {
+      for (const grd of GRADES) { const t = (S.gradeTeams[grd] || []).find(t => t.id === teamId); if (t) return t; }
+      return { name: 'TBD', c1: '#888', c2: '#fff', id: teamId };
     }
-    function applyResultToLB(t1id, t2id, s1, s2) {
-      initLB();
-      const lb1 = S.leaderboard[t1id], lb2 = S.leaderboard[t2id];
-      if (!lb1 || !lb2) return false;
-      const win1 = s1 > s2;
-      lb1.w += win1 ? 1 : 0; lb1.l += win1 ? 0 : 1; lb1.pf += s1; lb1.pa += s2;
-      lb2.w += win1 ? 0 : 1; lb2.l += win1 ? 1 : 0; lb2.pf += s2; lb2.pa += s1;
-      const ge = { t1: t1id, t2: t2id, s1, s2, date: new Date().toLocaleDateString() };
-      if (!lb1.games) lb1.games = []; if (!lb2.games) lb2.games = [];
-      lb1.games.push(ge); lb2.games.push(ge);
-      if (!S.results) S.results = [];
-      S.results.push({ ...ge, id: Date.now() });
-      return true;
+    function gradeOfTeam(teamId) {
+      for (const grd of GRADES) { if ((S.gradeTeams[grd] || []).some(t => t.id === teamId)) return grd; }
+      return null;
     }
-    window.recordResult = function () {
-      const t1 = g('rec-t1').value, t2 = g('rec-t2').value;
-      const s1 = parseInt(g('rec-s1').value) || 0, s2 = parseInt(g('rec-s2').value) || 0;
-      if (t1 === t2) { toast('Pick two different teams'); return; }
-      if (s1 === 0 && s2 === 0) { toast('Enter the final scores'); return; }
-      if (!applyResultToLB(t1, t2, s1, s2)) { toast('Team not found'); return; }
-      pushState(); renderAll(); g('rec-s1').value = ''; g('rec-s2').value = '';
-      toast(`✅ ${getTeam(t1).name} ${s1}–${s2} ${getTeam(t2).name}`);
-    };
-    window.recordResultFromCourt = function (c) {
-      const ct = S.courts[c];
-      if (ct.t1 === ct.t2) { toast('Teams not configured'); return; }
-      if (ct.s1 === 0 && ct.s2 === 0) { toast('No score to record'); return; }
-      if (!applyResultToLB(ct.t1, ct.t2, ct.s1, ct.s2)) { toast('Teams not in leaderboard'); return; }
-      pushState(); renderAll(); toast(`✅ Saved: ${getTeam(ct.t1).name} ${ct.s1}–${ct.s2} ${getTeam(ct.t2).name}`);
-    };
-    window.clearLeaderboard = function () {
-      if (!confirm('Clear ALL results and reset leaderboard?')) return;
-      S.leaderboard = {}; S.results = []; initLB(); pushState(); renderAll(); toast('Leaderboard cleared');
-    };
-    window.saveSeasonLabel = function () {
-      const v = g('season-label-inp').value.trim(); if (v) { S.seasonLabel = v; pushState(); renderAll(); toast('Saved'); }
-    };
-    function getSorted() {
-      initLB();
-      return S.teams.map(t => {
-        const lb = S.leaderboard[t.id] || { w: 0, l: 0, pf: 0, pa: 0, games: [] };
-        const gp = lb.w + lb.l, diff = lb.pf - lb.pa, pct = gp > 0 ? lb.w / gp : 0;
-        return { ...t, ...lb, gp, diff, pct };
+
+    // ═══════════════════════════════
+    //  LEADERBOARD DATA
+    // ═══════════════════════════════
+    function getSortedGrade(grd) {
+      const teams = S.gradeTeams[grd] || [];
+      const lb = S.gradeLB[grd] || {};
+      return teams.map(t => {
+        const r = lb[t.id] || { w: 0, l: 0, pf: 0, pa: 0, games: [] };
+        const gp = r.w + r.l, diff = r.pf - r.pa, pct = gp > 0 ? r.w / gp : 0;
+        return { ...t, ...r, gp, diff, pct };
       }).sort((a, b) => b.w !== a.w ? b.w - a.w : b.diff - a.diff);
     }
 
-    // ══════════ GAME ACTIONS ══════════
+    function applyResult(grd, t1id, t2id, s1, s2) {
+      if (!S.gradeLB[grd]) S.gradeLB[grd] = {};
+      if (!S.gradeLB[grd][t1id]) S.gradeLB[grd][t1id] = { w: 0, l: 0, pf: 0, pa: 0, games: [] };
+      if (!S.gradeLB[grd][t2id]) S.gradeLB[grd][t2id] = { w: 0, l: 0, pf: 0, pa: 0, games: [] };
+      const r1 = S.gradeLB[grd][t1id], r2 = S.gradeLB[grd][t2id];
+      const win1 = s1 > s2; const date = new Date().toLocaleDateString();
+      r1.w += win1 ? 1 : 0; r1.l += win1 ? 0 : 1; r1.pf += s1; r1.pa += s2;
+      r2.w += win1 ? 0 : 1; r2.l += win1 ? 1 : 0; r2.pf += s2; r2.pa += s1;
+      if (!r1.games) r1.games = []; if (!r2.games) r2.games = [];
+      const ge = { t1: t1id, t2: t2id, s1, s2, date }; r1.games.push(ge); r2.games.push(ge);
+    }
+
+    window.recordResult = function () {
+      const grd = g('rec-grade').value, t1 = g('rec-t1').value, t2 = g('rec-t2').value;
+      const s1 = parseInt(g('rec-s1').value) || 0, s2 = parseInt(g('rec-s2').value) || 0;
+      if (t1 === t2) { toast('Pick two different teams'); return; }
+      if (s1 === 0 && s2 === 0) { toast('Enter the final scores'); return; }
+      applyResult(grd, t1, t2, s1, s2);
+      pushState(); renderAll(); g('rec-s1').value = ''; g('rec-s2').value = '';
+      toast(`✅ ${getTeam(t1).name} ${s1}–${s2} ${getTeam(t2).name} (${GRADE_LABELS[grd]})`);
+    };
+
+    window.recordResultFromCourt = function (c) {
+      const ct = S.courts[c], grd = S.activeCourts[c];
+      if (!grd) { toast('No grade set for this court'); return; }
+      if (ct.t1 === ct.t2) { toast('Teams not configured'); return; }
+      if (ct.s1 === 0 && ct.s2 === 0) { toast('No score to record'); return; }
+      applyResult(grd, ct.t1, ct.t2, ct.s1, ct.s2);
+      pushState(); renderAll();
+      toast(`✅ ${getTeam(ct.t1).name} ${ct.s1}–${ct.s2} ${getTeam(ct.t2).name} (${GRADE_LABELS[grd]})`);
+    };
+
+    window.clearGradeLeaderboard = function () {
+      if (!confirm(`Clear all results for ${GRADE_LABELS[adminLBGrade]}?`)) return;
+      S.gradeLB[adminLBGrade] = defaultLB(S.gradeTeams[adminLBGrade]);
+      pushState(); renderAll(); toast(`${GRADE_LABELS[adminLBGrade]} cleared`);
+    };
+    window.clearAllLeaderboards = function () {
+      if (!confirm('Clear ALL grades results? This cannot be undone.')) return;
+      GRADES.forEach(grd => { S.gradeLB[grd] = defaultLB(S.gradeTeams[grd]); });
+      pushState(); renderAll(); toast('All leaderboards cleared');
+    };
+
+    // ═══════════════════════════════
+    //  TEAM MANAGEMENT
+    // ═══════════════════════════════
+    window.addTeam = function () {
+      const name = g('nt-name').value.trim(), grd = g('nt-grade').value;
+      if (!name) return;
+      const id = grd + '_t' + Date.now();
+      if (!S.gradeTeams[grd]) S.gradeTeams[grd] = [];
+      S.gradeTeams[grd].push({ id, name, c1: g('nt-c1').value, c2: g('nt-c2').value });
+      if (!S.gradeLB[grd]) S.gradeLB[grd] = {};
+      S.gradeLB[grd][id] = { w: 0, l: 0, pf: 0, pa: 0, games: [] };
+      g('nt-name').value = ''; pushState(); renderAll(); toast(`Team "${name}" added to ${GRADE_LABELS[grd]}`);
+    };
+    window.deleteTeam = function (id) {
+      const grd = gradeOfTeam(id); if (!grd) return;
+      S.gradeTeams[grd] = S.gradeTeams[grd].filter(t => t.id !== id);
+      if (S.gradeLB[grd]) delete S.gradeLB[grd][id];
+      pushState(); renderAll(); toast('Team removed');
+    };
+
+    // ═══════════════════════════════
+    //  GAME ACTIONS
+    // ═══════════════════════════════
     window.addScore = function (c, team, pts) {
       const ct = S.courts[c];
       if (team === 1) ct.s1 += pts; else ct.s2 += pts;
       const tot = ct.s1 + ct.s2; if (tot > 0) ct.mom = Math.round((ct.s1 / tot) * 100);
-      ct.history.push({ team, pts, t: ct.secs });
-      pushState(); renderAll();
+      ct.history.push({ team, pts, t: ct.secs }); pushState(); renderAll();
       const el = g(`ts-${c}${team}`); el.classList.remove('pop', 'three'); void el.offsetWidth; el.classList.add(pts === 3 ? 'three' : 'pop');
       toast(`+${pts} → ${team === 1 ? getTeam(ct.t1).name : getTeam(ct.t2).name}`);
     };
@@ -2474,12 +2703,14 @@
     window.applyTeams = function () {
       S.courts.a.t1 = g('aa-t1').value; S.courts.a.t2 = g('aa-t2').value;
       S.courts.b.t1 = g('ab-t1').value; S.courts.b.t2 = g('ab-t2').value;
+      // auto-detect grade for each court
+      const ga = gradeOfTeam(S.courts.a.t1), gb = gradeOfTeam(S.courts.b.t1);
+      if (ga) S.activeCourts.a = ga; if (gb) S.activeCourts.b = gb;
       pushState(); renderAll();
     };
     window.ovScore = function (c, team) {
       const v = parseInt(g(`ov-${c}-s${team}`).value) || 0; const ct = S.courts[c];
-      if (team === 1) ct.s1 = v; else ct.s2 = v; const tot = ct.s1 + ct.s2; ct.mom = tot > 0 ? Math.round((ct.s1 / tot) * 100) : 50;
-      pushState(); renderAll(); toast('Score overridden');
+      if (team === 1) ct.s1 = v; else ct.s2 = v; const tot = ct.s1 + ct.s2; ct.mom = tot > 0 ? Math.round((ct.s1 / tot) * 100) : 50; pushState(); renderAll(); toast('Score overridden');
     };
     window.ovClock = function (c) {
       const v = g(`ov-${c}-clk`).value; const p = v.split(':');
@@ -2497,67 +2728,87 @@
     window.swapTeams = function (c) {
       const ct = S.courts[c];[ct.t1, ct.t2] = [ct.t2, ct.t1];[ct.s1, ct.s2] = [ct.s2, ct.s1];[ct.f1, ct.f2] = [ct.f2, ct.f1]; ct.mom = 100 - ct.mom; pushState(); renderAll(); toast('Teams swapped');
     };
-    window.addTeam = function () {
-      const name = g('nt-name').value.trim(); if (!name) return;
-      S.teams.push({ id: 't' + Date.now(), name, c1: g('nt-c1').value, c2: g('nt-c2').value });
-      initLB(); g('nt-name').value = ''; pushState(); renderAll(); toast(`Team "${name}" added`);
-    };
-    window.deleteTeam = function (id) { S.teams = S.teams.filter(t => t.id !== id); pushState(); renderAll(); toast('Team removed'); };
     window.sendAnn = function () { S.banner = g('ann-msg').value || S.banner; S.sponsor = g('ann-sponsor').value || S.sponsor; pushState(); renderAll(); toast('Banner updated'); };
     window.clearAnn = function () { S.banner = 'HoopBoard Pro — Live'; pushState(); renderAll(); };
     window.trigAnim = function (c, type) { ['1', '2'].forEach(n => { const el = g(`ts-${c}${n}`); el.classList.remove('pop', 'three'); void el.offsetWidth; el.classList.add(type); }); };
     window.trigClutch = function (c) { const ov = g(`cov-${c}`); ov.classList.add('on'); setTimeout(() => ov.classList.remove('on'), 5000); };
-    window.fullReset = function () { if (!confirm('Reset EVERYTHING?')) return;['a', 'b'].forEach(c => { clearInterval(timers[c]); timers[c] = null; }); S = JSON.parse(JSON.stringify(DEFAULT_STATE)); pushState(); renderAll(); toast('Full reset done'); };
+    window.fullReset = function () { if (!confirm('Reset EVERYTHING?')) return;['a', 'b'].forEach(c => { clearInterval(timers[c]); timers[c] = null; }); S = buildDefaultState(); pushState(); renderAll(); toast('Full reset done'); };
     window.exportJSON = function () { const b = new Blob([JSON.stringify(S, null, 2)], { type: 'application/json' }); const u = URL.createObjectURL(b); const a = document.createElement('a'); a.href = u; a.download = 'hoopboard_state.json'; a.click(); };
 
-    // ══════════ STATS MODAL ══════════
-    window.openStatsModal = function (teamId) {
+    // ═══════════════════════════════
+    //  STATS MODAL
+    // ═══════════════════════════════
+    window.openStatsModal = function (teamId, grd) {
       const t = getTeam(teamId);
-      const lb = (S.leaderboard && S.leaderboard[teamId]) || { w: 0, l: 0, pf: 0, pa: 0, games: [] };
+      const lb = (S.gradeLB[grd] && S.gradeLB[grd][teamId]) || { w: 0, l: 0, pf: 0, pa: 0, games: [] };
       const gp = lb.w + lb.l, diff = lb.pf - lb.pa;
       const pct = gp > 0 ? ((lb.w / gp) * 100).toFixed(1) : '0.0';
       const ppg = gp > 0 ? (lb.pf / gp).toFixed(1) : '—';
       const papg = gp > 0 ? (lb.pa / gp).toFixed(1) : '—';
       g('modal-blob').style.background = t.c1; g('modal-blob').textContent = t.name.substring(0, 2).toUpperCase();
       g('modal-team-name').textContent = t.name;
-      g('modal-team-sub').textContent = `${lb.w}W – ${lb.l}L  ·  ${gp} games played`;
+      g('modal-grade-tag').textContent = `${GRADE_LABELS[grd]}  ·  ${lb.w}W – ${lb.l}L  ·  ${gp} games`;
       g('modal-stat-grid').innerHTML = `
     <div class="stat-box"><div class="stat-val" style="color:var(--green)">${lb.w}</div><div class="stat-lbl">Wins</div></div>
     <div class="stat-box"><div class="stat-val" style="color:var(--red)">${lb.l}</div><div class="stat-lbl">Losses</div></div>
     <div class="stat-box"><div class="stat-val" style="color:${diff >= 0 ? 'var(--green)' : 'var(--red)'}">${diff > 0 ? '+' : ''}${diff}</div><div class="stat-lbl">Diff</div></div>
     <div class="stat-box"><div class="stat-val">${pct}%</div><div class="stat-lbl">Win %</div></div>
     <div class="stat-box"><div class="stat-val">${gp}</div><div class="stat-lbl">Played</div></div>
-    <div class="stat-box"><div class="stat-val">${ppg}</div><div class="stat-lbl">PPG For</div></div>
-    <div class="stat-box"><div class="stat-val">${papg}</div><div class="stat-lbl">PPG Vs</div></div>
-    <div class="stat-box"><div class="stat-val">${lb.pf}</div><div class="stat-lbl">Pts Scored</div></div>
+    <div class="stat-box"><div class="stat-val">${ppg}</div><div class="stat-lbl">PPG</div></div>
+    <div class="stat-box"><div class="stat-val">${papg}</div><div class="stat-lbl">Opp PPG</div></div>
+    <div class="stat-box"><div class="stat-val">${lb.pf || 0}</div><div class="stat-lbl">Pts For</div></div>
   `;
       const games = (lb.games || []).slice().reverse();
-      g('modal-game-log').innerHTML = games.length === 0
-        ? '<div class="game-log-empty">No games recorded yet</div>'
-        : games.map(gm => {
+      g('modal-game-log').innerHTML = games.length === 0 ? '<div class="game-log-empty">No games recorded yet</div>' :
+        games.map(gm => {
           const isT1 = gm.t1 === teamId;
           const myS = isT1 ? gm.s1 : gm.s2, oppS = isT1 ? gm.s2 : gm.s1, oppId = isT1 ? gm.t2 : gm.t1;
           const opp = getTeam(oppId), won = myS > oppS;
           return `<div class="game-log-row">
-        <div class="game-log-result ${won ? 'W' : 'L'}">${won ? 'W' : 'L'}</div>
-        <div class="game-log-teams">
-          <span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:${opp.c1};margin-right:4px;vertical-align:middle"></span>
-          vs ${opp.name} <span style="color:var(--muted);font-weight:400">${gm.date || ''}</span>
+        <div class="glr-result ${won ? 'W' : 'L'}">${won ? 'W' : 'L'}</div>
+        <div class="glr-teams">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:3px;background:${opp.c1};margin-right:4px;vertical-align:middle"></span>
+          vs ${opp.name} <span>${gm.date || ''}</span>
         </div>
-        <div class="game-log-score" style="color:${won ? 'var(--green)' : 'var(--red)'}">${myS}–${oppS}</div>
+        <div class="glr-score" style="color:${won ? 'var(--green)' : 'var(--red)'}">${myS}–${oppS}</div>
       </div>`;
         }).join('');
       g('stats-modal').classList.add('open');
     };
     window.closeStatsModal = function () { g('stats-modal').classList.remove('open'); };
-    window.closeModal = function (e) { if (e.target === g('stats-modal')) closeStatsModal(); };
+    window.closeModalBg = function (e) { if (e.target === g('stats-modal')) closeStatsModal(); };
 
-    // ══════════ RENDER ══════════
-    function getTeam(id) { return S.teams.find(t => t.id === id) || { name: 'TBD', c1: '#888', c2: '#fff', id }; }
+    // ═══════════════════════════════
+    //  GRADE SWITCHING (leaderboard)
+    // ═══════════════════════════════
+    window.switchGrade = function (grd, btn) {
+      currentGrade = grd;
+      document.querySelectorAll('.grade-tab').forEach(t => t.classList.remove('on'));
+      if (btn) btn.classList.add('on');
+      document.querySelectorAll('.grade-content').forEach(gc => gc.classList.remove('on'));
+      const panel = g('grade-panel-' + grd); if (panel) panel.classList.add('on');
+      renderGradeLeaderboard(grd);
+    };
+    window.switchAdminLBGrade = function (grd, btn) {
+      adminLBGrade = grd;
+      document.querySelectorAll('.grade-admin-tab').forEach(t => t.classList.remove('on'));
+      if (btn) btn.classList.add('on');
+      renderAdminLBPreview();
+    };
+
+    // ═══════════════════════════════
+    //  RENDER
+    // ═══════════════════════════════
     function fmt(secs) { const m = Math.floor(secs / 60), s = secs % 60; return `${m}:${s < 10 ? '0' : ''}${s}`; }
     function g(id) { return document.getElementById(id); }
 
-    function renderAll() { renderDisplay(); renderRefPanel('a'); renderRefPanel('b'); renderDropdowns(); renderTeamList(); renderLeaderboard(); renderAdminLBPreview(); }
+    function renderAll() {
+      renderDisplay(); renderRefPanel('a'); renderRefPanel('b');
+      renderAllDropdowns(); renderTeamList();
+      renderGradePanels(); renderGradeLeaderboard(currentGrade);
+      renderAdminLBGradeTabs(); renderAdminLBPreview();
+      renderRecDropdowns();
+    }
 
     function renderDisplay() {
       ['a', 'b'].forEach(c => {
@@ -2579,6 +2830,7 @@
       g('banner-msg').textContent = S.banner || 'HoopBoard Pro'; g('banner-sponsor').textContent = S.sponsor || '';
     }
     function renderFouls(elId, count) { const el = g(elId); if (!el) return; el.innerHTML = ''; for (let i = 0; i < 5; i++) { const d = document.createElement('div'); d.className = 'foul-dot' + (i < count ? ' on' : ''); el.appendChild(d); } }
+
     function renderRefPanel(c) {
       const ct = S.courts[c], t1 = getTeam(ct.t1), t2 = getTeam(ct.t2);
       const safe = id => { const e = g(id); return e || { textContent: '', className: '', style: {} }; };
@@ -2589,34 +2841,82 @@
       const dot = g(`sd-${c}`), stxt = g(`st-${c}`);
       if (dot && stxt) { if (ct.running) { dot.className = 'sdot live'; stxt.textContent = 'LIVE'; } else if (ct.s1 + ct.s2 > 0) { dot.className = 'sdot paused'; stxt.textContent = 'Paused'; } else { dot.className = 'sdot'; stxt.textContent = 'Ready'; } }
     }
-    function renderDropdowns() {
-      const fill = (selId, cur) => { const sel = g(selId); if (!sel) return; sel.innerHTML = S.teams.map(t => `<option value="${t.id}"${t.id === cur ? ' selected' : ''}>${t.name}</option>`).join(''); };
+
+    function allTeams() { return GRADES.flatMap(grd => S.gradeTeams[grd] || []); }
+
+    function renderAllDropdowns() {
+      const fill = (selId, cur) => { const sel = g(selId); if (!sel) return; sel.innerHTML = allTeams().map(t => `<option value="${t.id}"${t.id === cur ? ' selected' : ''}>${t.name} (${GRADE_LABELS[gradeOfTeam(t.id) || 'g6']})</option>`).join(''); };
       fill('aa-t1', S.courts.a.t1); fill('aa-t2', S.courts.a.t2); fill('ab-t1', S.courts.b.t1); fill('ab-t2', S.courts.b.t2);
-      fill('rec-t1', S.courts.a.t1); fill('rec-t2', S.courts.a.t2);
     }
+
+    function renderRecDropdowns() {
+      const gradeEl = g('rec-grade'); if (!gradeEl) return;
+      const grd = gradeEl.value; const teams = S.gradeTeams[grd] || [];
+      ['rec-t1', 'rec-t2'].forEach(id => { const sel = g(id); if (!sel) return; sel.innerHTML = teams.map(t => `<option value="${t.id}">${t.name}</option>`).join(''); });
+    }
+
     function renderTeamList() {
       const el = g('team-list'); if (!el) return;
-      el.innerHTML = S.teams.map(t => `<div class="team-item"><div class="tdot" style="background:${t.c1}"></div><div class="tname">${t.name}</div><div style="font-size:11px;color:var(--muted)">${t.c1}</div><button class="xbtn" onclick="deleteTeam('${t.id}')">✕</button></div>`).join('');
+      el.innerHTML = GRADES.map(grd => {
+        const teams = S.gradeTeams[grd] || []; if (!teams.length) return '';
+        return `<div style="margin-bottom:12px">
+      <div style="font-family:var(--font-d);font-size:11px;letter-spacing:3px;color:${GRADE_COLORS[grd]};font-weight:800;text-transform:uppercase;margin-bottom:6px">${GRADE_LABELS[grd]}</div>
+      ${teams.map(t => `<div class="team-item">
+        <div class="tdot" style="background:${t.c1}"></div>
+        <div class="tname">${t.name}</div>
+        <button class="xbtn" onclick="deleteTeam('${t.id}')">✕</button>
+      </div>`).join('')}
+    </div>`;
+      }).join('');
     }
-    function renderLeaderboard() {
-      const rows = getSorted(); const lb = g('lb-body'); if (!lb) return;
-      if (g('lb-season-label')) g('lb-season-label').textContent = S.seasonLabel || 'Season 2024–25';
-      if (rows.length === 0) { lb.innerHTML = '<div class="lb-empty">No teams yet. Add teams in Admin → Teams.</div>'; return; }
-      lb.innerHTML = rows.map((t, i) => {
+
+    // Build grade panels once, update content
+    function renderGradePanels() {
+      const container = g('grade-panels'); if (!container) return;
+      // Build panels if not existing
+      GRADES.forEach(grd => {
+        if (!g('grade-panel-' + grd)) {
+          const div = document.createElement('div');
+          div.className = 'grade-content' + (grd === currentGrade ? ' on' : '');
+          div.id = 'grade-panel-' + grd;
+          div.innerHTML = `
+        <div class="grade-hero">
+          <div class="grade-badge ${grd}">${GRADE_LABELS[grd].replace('Grade ', 'G')}</div>
+          <div class="grade-hero-info">
+            <h2>${GRADE_LABELS[grd]}</h2>
+            <p>6 Teams · Season Standings · Tap any team for stats</p>
+          </div>
+        </div>
+        <div class="lb-table-wrap">
+          <div class="lb-thead">
+            <div class="lb-th">#</div><div class="lb-th">Team</div>
+            <div class="lb-th">W</div><div class="lb-th">L</div><div class="lb-th">GP</div>
+            <div class="lb-th">DIFF</div><div class="lb-th">WIN%</div>
+          </div>
+          <div id="lb-body-${grd}"></div>
+        </div>`;
+          container.appendChild(div);
+        }
+      });
+    }
+
+    function renderGradeLeaderboard(grd) {
+      const bodyEl = g('lb-body-' + grd); if (!bodyEl) return;
+      const rows = getSortedGrade(grd);
+      if (!rows.length) { bodyEl.innerHTML = '<div class="lb-empty">No teams yet. Add in Admin → Teams.</div>'; return; }
+      bodyEl.innerHTML = rows.map((t, i) => {
         const rank = i + 1, rankCls = rank <= 3 ? `rank-${rank}` : '';
         const medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : rank;
         const diffCls = t.diff > 0 ? 'diff-pos' : t.diff < 0 ? 'diff-neg' : 'diff-zero';
         const pctStr = (t.pct * 100).toFixed(1) + '%';
-        const pctW = Math.round(t.pct * 100);
         const init = t.name.substring(0, 2).toUpperCase();
-        return `<div class="lb-row ${rankCls}" onclick="openStatsModal('${t.id}')">
+        return `<div class="lb-row ${rankCls}" onclick="openStatsModal('${t.id}','${grd}')">
       <div class="lb-td rank-num center">${medal}</div>
       <div class="lb-td"><div class="team-cell">
         <div class="team-blob" style="background:${t.c1}">${init}</div>
-        <div>
-          <div class="team-cell-name">${t.name}</div>
+        <div><div class="team-cell-name">${t.name}</div>
           <div class="team-cell-sub">${t.gp} game${t.gp !== 1 ? 's' : ''}</div>
-          <div class="pct-bar-wrap"><div class="pct-bar-fill" style="width:${pctW}%"></div></div>
+          <div class="pct-bar-wrap"><div class="pct-bar-fill" style="width:${Math.round(t.pct * 100)}%"></div></div>
         </div>
       </div></div>
       <div class="lb-td center"><span class="w-num">${t.w}</span></div>
@@ -2628,41 +2928,60 @@
     </div>`;
       }).join('');
     }
+
+    function renderAdminLBGradeTabs() {
+      const el = g('admin-lb-grade-tabs'); if (!el || el.children.length > 0) return;
+      GRADES.forEach((grd, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'grade-admin-tab' + (i === 0 ? ' on' : '');
+        btn.textContent = GRADE_LABELS[grd];
+        btn.onclick = () => switchAdminLBGrade(grd, btn);
+        el.appendChild(btn);
+      });
+    }
+
     function renderAdminLBPreview() {
       const el = g('admin-lb-preview'); if (!el) return;
-      const rows = getSorted();
-      if (rows.length === 0) { el.innerHTML = '<div style="font-size:13px;color:var(--muted);padding:12px 0">No results recorded yet.</div>'; return; }
-      el.innerHTML = '<div style="display:flex;flex-direction:column;gap:6px;margin-top:4px">' +
-        rows.map((t, i) => `<div style="display:flex;align-items:center;gap:10px;background:var(--surface2);border-radius:8px;padding:8px 12px">
-      <div style="font-family:var(--font-d);font-size:16px;font-weight:900;color:var(--muted);width:22px;text-align:center">${i + 1}</div>
-      <div style="width:10px;height:10px;border-radius:50%;background:${t.c1};flex-shrink:0"></div>
+      const rows = getSortedGrade(adminLBGrade);
+      if (!rows.length) { el.innerHTML = '<div style="font-size:13px;color:var(--muted);padding:10px 0">No teams/results yet.</div>'; return; }
+      el.innerHTML = '<div style="display:flex;flex-direction:column;gap:5px;margin-top:6px">' +
+        rows.map((t, i) => `<div class="preview-row">
+      <div style="font-family:var(--font-d);font-size:15px;font-weight:900;color:var(--muted);width:20px;text-align:center">${i + 1}</div>
+      <div style="width:9px;height:9px;border-radius:50%;background:${t.c1};flex-shrink:0"></div>
       <div style="flex:1;font-weight:600;font-size:14px">${t.name}</div>
-      <div style="font-family:var(--font-d);font-size:14px;color:var(--green)">${t.w}W</div>
-      <div style="font-family:var(--font-d);font-size:14px;color:var(--red)">${t.l}L</div>
-      <div style="font-family:var(--font-d);font-size:13px;color:${t.diff >= 0 ? 'var(--green)' : 'var(--red)'}">${t.diff > 0 ? '+' : ''}${t.diff}</div>
+      <div style="font-family:var(--font-d);font-size:13px;color:var(--green)">${t.w}W</div>
+      <div style="font-family:var(--font-d);font-size:13px;color:var(--red)">${t.l}L</div>
+      <div style="font-family:var(--font-d);font-size:12px;color:${t.diff >= 0 ? 'var(--green)' : 'var(--red)'}">${t.diff > 0 ? '+' : ''}${t.diff}</div>
     </div>`).join('') +
         '</div>';
     }
 
-    // ══════════ NAV & UI ══════════
+    // ═══════════════════════════════
+    //  NAV & UI
+    // ═══════════════════════════════
     window.showPage = function (name) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
       g(`page-${name}`).classList.add('active');
       const map = { display: 'nb-display', leaderboard: 'nb-leaderboard', 'ref-a': 'nb-ref-a', 'ref-b': 'nb-ref-b', admin: 'nb-admin' };
       if (map[name]) g(map[name]).classList.add('active');
-      if (name === 'leaderboard') renderLeaderboard();
+      if (name === 'leaderboard') { renderGradePanels(); renderGradeLeaderboard(currentGrade); }
     };
     window.aTab = function (name, btn) {
       document.querySelectorAll('.tc').forEach(t => t.classList.remove('on'));
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
       g(`tc-${name}`).classList.add('on'); btn.classList.add('on');
+      if (name === 'leaderboard') renderRecDropdowns();
     };
     function setLive(on) { const p = g('live-pill'), t = g('live-txt'); if (on) { p.className = 'live-pill'; t.textContent = 'LIVE'; } else { p.className = 'live-pill offline'; t.textContent = 'OFFLINE'; } }
     window.toggleFS = function () { const el = g('page-display'); if (!document.fullscreenElement) (el.requestFullscreen || el.webkitRequestFullscreen).call(el); else (document.exitFullscreen || document.webkitExitFullscreen).call(document); };
     function toast(msg) { const t = g('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(window._tt); window._tt = setTimeout(() => t.classList.remove('show'), 2400); }
 
-    // ══════════ BOOT ══════════
+    // ═══════════════════════════════
+    //  BOOT
+    // ═══════════════════════════════
+    // Wire rec-grade change
+    document.getElementById('rec-grade').addEventListener('change', renderRecDropdowns);
     const savedCfg = loadFBCfg(); if (savedCfg) launchApp(savedCfg);
   </script>
 </body>
